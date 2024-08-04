@@ -1,120 +1,145 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class Jogatina {
-    private int qtd_jogs, indice_atual, valor_dados;
-    private boolean jogada_finalizada;
+    private int qtd_jogs, indice_atual;
     private Jogador jog;
     private ArrayList<Jogador> jogs;
+    private final Object lock = new Object();
 
-    public Jogatina(ArrayList<Jogador> jogs, int qtd_jogs) {
+    public Jogatina(int qtd_jogs) {
+        this.jogs = new ArrayList<Jogador>();
         this.qtd_jogs = qtd_jogs;
-        this.jogs = jogs;
-        this.jog = jogs.get(0);
         this.indice_atual = 0;
-        this.jogada_finalizada = false;
     }
 
-    public void AtualizarJogador() {
-        indice_atual = (indice_atual + 1) % qtd_jogs;
-        jog = jogs.get(indice_atual);
+    private float getTempoPausa() {
+        float tempo_pausa = 0f;
+
+        for (int i = 0; i < 4; i++)
+            tempo_pausa += jog.getPeca(i).getTempoPausa();
+
+        return tempo_pausa;
+    }
+
+    private void reiniciarPecas() {
+        for (int i = 0; i < 4; i++) {
+            jog.getPeca(i).setJogadaFinalizada(false);
+            jog.getPeca(i).getBotao().setDisable(true);
+        }
+    }
+
+    private void reajustarBotao(float tempo_pausa, Tabuleiro tabuleiro) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(tempo_pausa), evento -> {
+            tabuleiro.getBotao().setDisable(false);
+            tabuleiro.setBotaoAtivado(true);
+            synchronized (lock) {
+                lock.notify();
+            }
+        }));
+
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    private void ajustarVez(boolean minha_vez) {
+        for (int i = 0; i < 4; i++)
+            jog.getPeca(i).setMinhaVez(minha_vez);
+    }
+
+    private void atualizarJogador(Tabuleiro tabuleiro) {
+        if (tabuleiro.getValorDado() != 6) {
+            this.ajustarVez(false);
+            jog.pintarBordaBranco(false);
+            indice_atual = (indice_atual + 1) % qtd_jogs;
+
+            for (int i = 0; i < 4; i++)
+                jog.getPeca(i).zerarTempoPausa();
+
+            jog = jogs.get(indice_atual);
+            this.ajustarVez(true);
+            jog.pintarBordaBranco(true);
+            tabuleiro.setJogador(jog);
+        }
     }
 
     public void ajustarJogadores(Pane root, String[] cores, int largura, Tabuleiro tabuleiro)
             throws FileNotFoundException {
 
-        for (int i = 0; i < qtd_jogs; i++) {
-            jogs.add(new Jogador(cores[i]));
-            jogs.get(i).setXQuadBrancos(tabuleiro.getXQuadBrancos());
-            jogs.get(i).setYQuadBrancos(tabuleiro.getYQuadBrancos());
-            jogs.get(i).setXBases(tabuleiro.getXBases());
-            jogs.get(i).setYBases(tabuleiro.getYBases());
-            jogs.get(i).gerarPecas(root, largura);
-        }
+        for (int i = 0; i < qtd_jogs; i++)
+            jogs.add(new Jogador(root, largura, cores[i], tabuleiro));
     }
 
     public void intercalarJogadores(Tabuleiro tabuleiro) {
-        // Obtém o botão girar dados do tabuleiro
-        Button btn_girar_dados = tabuleiro.getBotaoGirarDados();
+        // Obtém o primeiro jogador da lista de jogadores
+        jog = jogs.get(0);
 
-        // Cria uma timeline que executa uma ação a cada 1 segundo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), evento1 -> {
+        // Define o jogador no tabuleiro e pinta a borda de branco
+        tabuleiro.setJogador(jog);
+        jog.pintarBordaBranco(true);
+        this.ajustarVez(true);
 
-            // Verifica se alguma peça do jogador atual pode fazer uma jogada válida com o
-            // valor dos dados
-            for (int i = 0; i < 4; i++) {
-                if (!jog.getPeca(i).verificarJogadaDisponivel(valor_dados)) {
-                    jogada_finalizada = true;
-                    break;
+        // Loop principal do jogo
+        while (true) {
+            int i;
+            float tempo_pausa;
+            boolean jogadas_disponiveis = false;
+
+            // Espera até que o botão no tabuleiro seja desativado
+            while (tabuleiro.getBotaoAtivado()) {
+                // Loop vazio aguardando desativação do botão
+                try {
+                    Thread.sleep(100); // Pequena pausa para evitar uso excessivo de CPU
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
 
-            // Define a ação a ser executada quando o botão girar dados for clicado
-            btn_girar_dados.setOnAction(evento2 -> {
-                // O jogador atual gira os dados e armazena o valor resultante
-                valor_dados = jog.girarDados();
-
-                // Atualiza o estilo do botão
-                tabuleiro.atualizarBotao(valor_dados, jog.getCorHexadecimal());
-
-                // Habilita os botões das peças do jogador atual para permitir a seleção de uma
-                // peça
-                for (int i = 0; i < 4; i++)
-                    jog.getPeca(i).getBotao().setDisable(false);
-
-                // Desabilita o botão girar dados enquanto a jogada está em andamento
-                btn_girar_dados.setDisable(true);
-            });
-
-            // Define a ação a ser executada quando um botão de peça é clicado
-            jog.getPeca(0).getBotao().setOnAction(evento3 -> {
-                // Move a peça selecionada pelo valor dos dados e marca a jogada como finalizada
-                jog.getPeca(0).mover(valor_dados);
-                jogada_finalizada = true;
-            });
-            jog.getPeca(1).getBotao().setOnAction(evento3 -> {
-                // Move a peça selecionada pelo valor dos dados e marca a jogada como finalizada
-                jog.getPeca(1).mover(valor_dados);
-                jogada_finalizada = true;
-            });
-            jog.getPeca(2).getBotao().setOnAction(evento3 -> {
-                // Move a peça selecionada pelo valor dos dados e marca a jogada como finalizada
-                jog.getPeca(2).mover(valor_dados);
-                jogada_finalizada = true;
-            });
-            jog.getPeca(3).getBotao().setOnAction(evento3 -> {
-                // Move a peça selecionada pelo valor dos dados e marca a jogada como finalizada
-                jog.getPeca(3).mover(valor_dados);
-                jogada_finalizada = true;
-            });
-
-            // Verifica se a jogada foi finalizada
-            if (jogada_finalizada) {
-                // Desabilita os botões das peças do jogador atual após a jogada ser finalizada
-                for (int i = 0; i < 4; i++)
-                    jog.getPeca(i).getBotao().setDisable(true);
-
-                // Habilita o botão girar dados para o próximo jogador
-                btn_girar_dados.setDisable(false);
-
-                // Atualiza o índice para o próximo jogador
-                this.AtualizarJogador();
-
-                // Reseta a variável de controle de jogada finalizada
-                jogada_finalizada = false;
+            // Verifica se o jogador tem alguma jogada disponível
+            for (i = 0; i < 4; i++) {
+                if (jog.getPeca(i).verificarJogadaDisponivel()) {
+                    jogadas_disponiveis = true;
+                    break; // Sai do loop assim que encontrar uma jogada disponível
+                }
             }
-        }));
 
-        // Define a timeline para executar indefinidamente
-        timeline.setCycleCount(Animation.INDEFINITE);
-        // Inicia a execução da timeline
-        timeline.play();
+            // Se há jogadas disponíveis
+            if (jogadas_disponiveis) {
+                // Espera até que todas as jogadas do jogador sejam finalizadas
+                while (!jog.getPeca(0).getJogadaFinalizada()
+                        && !jog.getPeca(1).getJogadaFinalizada()
+                        && !jog.getPeca(2).getJogadaFinalizada()
+                        && !jog.getPeca(3).getJogadaFinalizada()) {
+                    // Loop vazio aguardando finalização das jogadas
+                    try {
+                        Thread.sleep(100); // Pequena pausa para evitar uso excessivo de CPU
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                tempo_pausa = this.getTempoPausa();
+            } else {
+                tempo_pausa = 0.5f;
+            }
+
+            this.reiniciarPecas();
+            this.reajustarBotao(tempo_pausa, tabuleiro);
+
+            synchronized (lock) {
+                try {
+                    lock.wait(); // Espera até que a Timeline chame notify
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            this.atualizarJogador(tabuleiro);
+        }
     }
 
 }

@@ -3,17 +3,17 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
+            "name": "Main",
             "request": "launch",
-            "mainClass": "${file}",
+            "mainClass": "Main",
+            "projectName": "ludo_pesquisa_pet_e358699b",
             "vmArgs": "--module-path C:\\Users\\Walter\\Documents\\java\\javafx-sdk-22.0.1\\lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
-            "name": "Main",
+            "name": "Current File",
             "request": "launch",
-            "mainClass": "Main",
-            "projectName": "ludo_poo_ebd3194a",
+            "mainClass": "${file}",
             "vmArgs": "--module-path C:\\Users\\Walter\\Documents\\java\\javafx-sdk-22.0.1\\lib --add-modules javafx.controls,javafx.fxml"
         }
     ]

@@ -10,7 +10,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class Tabuleiro {
-    private Button btn_girar_dados;
+    private int valor_dado;
+    private boolean btn_ativado;
+    private Jogador jog;
+    private Button btn_girar_dado;
+    private Circle circ_grandes[];
     private ArrayList<Integer> x_quad_brancos, y_quad_brancos;
     private ArrayList<Integer> x_quad_finais, y_quad_finais;
     private ArrayList<Double> x_bases, y_bases;
@@ -22,12 +26,18 @@ public class Tabuleiro {
         this.y_quad_finais = new ArrayList<Integer>();
         this.x_bases = new ArrayList<Double>();
         this.y_bases = new ArrayList<Double>();
+        this.circ_grandes = new Circle[4];
         this.colocarPapelParede(root, largura, altura);
         this.colocarCentro(root, largura, altura);
         this.colocarQuadBrancos(root, largura, altura);
         this.colocarRetasFinais(root, largura, altura);
         this.colocarCirculos(root, largura, altura);
         this.gerarCaixaDados(root, largura, altura);
+        this.btn_ativado = true;
+
+        this.btn_girar_dado.setOnAction(evento -> {
+            this.girarDados(largura);
+        });
     }
 
     private void colocarPapelParede(Pane root, int largura, int altura) throws FileNotFoundException {
@@ -221,9 +231,10 @@ public class Tabuleiro {
         }
 
         y += tam_quad;
+        x -= tam_quad;
 
-        for (i = 0; i < 6; i++) {
-            if (i == 1)
+        for (i = 0; i < 5; i++) {
+            if (i == 0)
                 cor = "#00008C";
             else
                 cor = "#FFFFFF";
@@ -241,7 +252,7 @@ public class Tabuleiro {
             y_quad_brancos.add(y);
         }
 
-        x -= tam_quad * 6;
+        x -= tam_quad * 5;
         y += tam_quad;
 
         for (i = 0; i < 6; i++) {
@@ -374,6 +385,7 @@ public class Tabuleiro {
             circulo.setFill(Color.web(cor));
             circulo.setStroke(Color.BLACK);
             circulo.setStrokeWidth(4);
+            this.circ_grandes[i] = circulo;
             root.getChildren().add(circulo);
 
             this.adicionarBases(root, x, y, raio, largura);
@@ -416,20 +428,17 @@ public class Tabuleiro {
     }
 
     private void gerarCaixaDados(Pane root, int largura, int altura) {
-        btn_girar_dados = new Button("0");
+        String estilo = String.format(
+                "-fx-border-color: black; -fx-border-width: 3px; -fx-font-family: 'Times New Roman'; -fx-font-size: %dpx;",
+                largura / 50);
 
-        btn_girar_dados.setPrefSize(largura / 16f, largura / 16f);
-        btn_girar_dados.setLayoutX(largura / 16f);
-        btn_girar_dados.setLayoutY(altura * (29f / 64f));
+        btn_girar_dado = new Button("0");
+        btn_girar_dado.setPrefSize(largura / 16f, largura / 16f);
+        btn_girar_dado.setLayoutX(largura / 16f);
+        btn_girar_dado.setLayoutY(altura * (29f / 64f));
+        btn_girar_dado.setStyle(estilo);
 
-        root.getChildren().addAll(btn_girar_dados);
-    }
-
-    public void atualizarBotao(int valor_dados, String cor) {
-        String estilo = String.format("-fx-background-color: %s; -fx-text-fill: white;", cor);
-
-        btn_girar_dados.setStyle(estilo);
-        btn_girar_dados.setText(String.format("%d", valor_dados));
+        root.getChildren().addAll(btn_girar_dado);
     }
 
     public ArrayList<Integer> getXQuadBrancos() {
@@ -448,7 +457,46 @@ public class Tabuleiro {
         return this.y_bases;
     }
 
-    public Button getBotaoGirarDados() {
-        return this.btn_girar_dados;
+    public Button getBotao() {
+        return this.btn_girar_dado;
+    }
+
+    private void girarDados(int largura) {
+        String formato = String.format(
+                "-fx-background-color: %s; -fx-border-color: black; -fx-border-width: 3px; -fx-font-family: 'Times New Roman'; -fx-font-size: %dpx;",
+                jog.getCorHexadecimal(), largura / 50);
+
+        valor_dado = (int) (Math.random() * 6 + 1);
+
+        btn_girar_dado.setDisable(true);
+        btn_girar_dado.setStyle(formato);
+        btn_girar_dado.setText(String.format("%d", valor_dado));
+        btn_ativado = false;
+
+        for (int i = 0; i < 4; i++) {
+            jog.getPeca(i).getBotao().setDisable(false);
+            jog.getPeca(i).setValorDado(valor_dado);
+        }
+
+    }
+
+    public void setJogador(Jogador jog) {
+        this.jog = jog;
+    }
+
+    public void setBotaoAtivado(Boolean btn_ativado) {
+        this.btn_ativado = btn_ativado;
+    }
+
+    public boolean getBotaoAtivado() {
+        return this.btn_ativado;
+    }
+
+    public Circle[] getCirculosGrandes() {
+        return this.circ_grandes;
+    }
+
+    public int getValorDado() {
+        return this.valor_dado;
     }
 }
