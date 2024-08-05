@@ -23,7 +23,7 @@ public class Jogador {
         this.setYQuadBrancos(tabuleiro.getYQuadBrancos());
 
         this.circ_grande = this.setCirculoGrande(tabuleiro.getCirculosGrandes());
-        this.pecas = this.gerarPecas(root, largura);
+        this.pecas = this.gerarPecas(root, largura, tabuleiro);
     }
 
     private String definirCorHexadecimal() {
@@ -102,13 +102,13 @@ public class Jogador {
         return circ_grande;
     }
 
-    private Peca[] gerarPecas(Pane root, int largura) throws FileNotFoundException {
+    private Peca[] gerarPecas(Pane root, int largura, Tabuleiro tabuleiro) throws FileNotFoundException {
         int i;
         Peca pecas[] = new Peca[4];
 
         for (i = 0; i < 4; i++) {
             pecas[i] = new Peca(root, cor, this.x_bases.get(i), this.y_bases.get(i), this.x_quad_brancos,
-                    this.y_quad_brancos, largura);
+                    this.y_quad_brancos, tabuleiro.getXQuadFinais(), tabuleiro.getYQuadFinais(), largura);
         }
 
         return pecas;
@@ -129,4 +129,84 @@ public class Jogador {
         return this.cor_hexa;
     }
 
+    public void encontrarPecasIguais(Peca peca) {
+        int i, j = 0;
+        Peca pecas_registradas[] = new Peca[3];
+
+        for (i = 0; i < 4; i++) {
+            if (this.pecas[i] != peca) {
+                pecas_registradas[j] = this.pecas[i];
+                ++j;
+            }
+        }
+
+        for (i = 0; i < 3; i++) {
+            if (this.PosicaoIgual(peca, pecas_registradas)) {
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                peca.moverComPulo();
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                break;
+            }
+        }
+    }
+
+    private boolean PosicaoIgual(Peca peca, Peca[] pecas_registradas) {
+        boolean igual = false;
+
+        for (int i = 0; i < 3; i++) {
+            if (peca.getPos() == pecas_registradas[i].getPos()
+                    && peca.getTipoPos().equals(pecas_registradas[i].getTipoPos())
+                    && !peca.getTipoPos().equals("linha_chegada")) {
+                igual = true;
+                break;
+            }
+        }
+
+        return igual;
+    }
+
+    public void encontrarPecasDiferentes(Peca peca, Peca[] pecas_registradas) {
+        int tempo_pausa;
+
+        if (pecas_registradas[peca.getPos()] != null && peca.getTipoPos().equals("quad_branco")) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            tempo_pausa = pecas_registradas[peca.getPos()].moverSemPulo();
+
+            try {
+                Thread.sleep(tempo_pausa);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            peca.setJogarDeNovo(true);
+        }
+    }
+
+    public void registrarMovimento(Peca peca, Peca[] pecas_registradas) {
+        if (peca.getTipoAnterior().equals("quad_branco"))
+            pecas_registradas[peca.getPosAnterior()] = null;
+        if (peca.getTipoPos().equals("quad_branco"))
+            pecas_registradas[peca.getPos()] = peca;
+    }
+
+    public String getCor() {
+        return this.cor;
+    }
 }

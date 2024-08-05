@@ -1,29 +1,30 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
+import javafx.stage.Stage;
 
 public class Jogatina {
     private int qtd_jogs, indice_atual;
+    private Peca pecas_registradas[] = new Peca[52];
     private Jogador jog;
     private ArrayList<Jogador> jogs;
-    private final Object lock = new Object();
 
     public Jogatina(int qtd_jogs) {
         this.jogs = new ArrayList<Jogador>();
         this.qtd_jogs = qtd_jogs;
         this.indice_atual = 0;
+
+        for (int i = 0; i < 52; i++)
+            this.pecas_registradas[i] = null;
     }
 
-    private float getTempoPausa() {
+    private int getTempoPausa() {
         float tempo_pausa = 0f;
 
         for (int i = 0; i < 4; i++)
             tempo_pausa += jog.getPeca(i).getTempoPausa();
 
-        return tempo_pausa;
+        return (int) (tempo_pausa * 1000);
     }
 
     private void reiniciarPecas() {
@@ -33,17 +34,10 @@ public class Jogatina {
         }
     }
 
-    private void reajustarBotao(float tempo_pausa, Tabuleiro tabuleiro) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(tempo_pausa), evento -> {
-            tabuleiro.getBotao().setDisable(false);
-            tabuleiro.setBotaoAtivado(true);
-            synchronized (lock) {
-                lock.notify();
-            }
-        }));
+    private void reajustarBotao(Tabuleiro tabuleiro) {
+        tabuleiro.getBotao().setDisable(false);
+        tabuleiro.setBotaoAtivado(true);
 
-        timeline.setCycleCount(1);
-        timeline.play();
     }
 
     private void ajustarVez(boolean minha_vez) {
@@ -51,19 +45,44 @@ public class Jogatina {
             jog.getPeca(i).setMinhaVez(minha_vez);
     }
 
-    private void atualizarJogador(Tabuleiro tabuleiro) {
+    private void atualizarJogador(Tabuleiro tabuleiro, Peca peca) {
+        for (int i = 0; i < 4; i++)
+            jog.getPeca(i).zerarTempoPausa();
+
+        if (peca != null) {
+            if (peca.getJogarDeNovo()) {
+                peca.setJogarDeNovo(false);
+                return;
+            }
+        }
+
         if (tabuleiro.getValorDado() != 6) {
             this.ajustarVez(false);
             jog.pintarBordaBranco(false);
             indice_atual = (indice_atual + 1) % qtd_jogs;
 
-            for (int i = 0; i < 4; i++)
-                jog.getPeca(i).zerarTempoPausa();
-
             jog = jogs.get(indice_atual);
             this.ajustarVez(true);
             jog.pintarBordaBranco(true);
             tabuleiro.setJogador(jog);
+        }
+    }
+
+    private void verificarVencedor(Stage stage) {
+        boolean venceu = true;
+
+        for (int i = 0; i < 4; i++) {
+            if (!jog.getPeca(i).getTipoPos().equals("linha_chegada")) {
+                venceu = false;
+                break;
+            }
+        }
+
+        if (venceu) {
+            stage.close();
+
+            GameOver game_over = new GameOver(jog);
+            game_over.mostrarTela();
         }
     }
 
@@ -74,7 +93,7 @@ public class Jogatina {
             jogs.add(new Jogador(root, largura, cores[i], tabuleiro));
     }
 
-    public void intercalarJogadores(Tabuleiro tabuleiro) {
+    public void intercalarJogadores(Tabuleiro tabuleiro, Stage stage) {
         // Obtém o primeiro jogador da lista de jogadores
         jog = jogs.get(0);
 
@@ -86,8 +105,9 @@ public class Jogatina {
         // Loop principal do jogo
         while (true) {
             int i;
-            float tempo_pausa;
+            int tempo_pausa;
             boolean jogadas_disponiveis = false;
+            Peca peca = null;
 
             // Espera até que o botão no tabuleiro seja desativado
             while (tabuleiro.getBotaoAtivado()) {
@@ -122,23 +142,40 @@ public class Jogatina {
                     }
                 }
 
+                for (i = 0; i < 4; i++) {
+                    if (jog.getPeca(i).getJogadaFinalizada()) {
+                        peca = jog.getPeca(i);
+                        break;
+                    }
+                }
+
                 tempo_pausa = this.getTempoPausa();
-            } else {
-                tempo_pausa = 0.5f;
-            }
+                this.reiniciarPecas();
 
-            this.reiniciarPecas();
-            this.reajustarBotao(tempo_pausa, tabuleiro);
-
-            synchronized (lock) {
                 try {
-                    lock.wait(); // Espera até que a Timeline chame notify
+                    Thread.sleep(tempo_pausa);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                jog.encontrarPecasIguais(peca);
+                jog.encontrarPecasDiferentes(peca, pecas_registradas);
+                jog.registrarMovimento(peca, pecas_registradas);
+                tempo_pausa = 250;
+            } else {
+                tempo_pausa = 500;
+                this.reiniciarPecas();
             }
 
-            this.atualizarJogador(tabuleiro);
+            try {
+                Thread.sleep(tempo_pausa);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            this.reajustarBotao(tabuleiro);
+            this.verificarVencedor(stage);
+            this.atualizarJogador(tabuleiro, peca);
         }
     }
 

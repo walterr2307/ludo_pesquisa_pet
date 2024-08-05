@@ -28,9 +28,9 @@ public class Tabuleiro {
         this.y_bases = new ArrayList<Double>();
         this.circ_grandes = new Circle[4];
         this.colocarPapelParede(root, largura, altura);
-        this.colocarCentro(root, largura, altura);
         this.colocarQuadBrancos(root, largura, altura);
         this.colocarRetasFinais(root, largura, altura);
+        this.colocarCentro(root, largura, altura);
         this.colocarCirculos(root, largura, altura);
         this.gerarCaixaDados(root, largura, altura);
         this.btn_ativado = true;
@@ -295,7 +295,7 @@ public class Tabuleiro {
         int i, x = (int) (largura * (23f / 48f)), y = (int) (altura * 0.84375f), tam_quad = largura / 24;
         Rectangle quad = new Rectangle();
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             quad = new Rectangle();
             quad.setWidth(tam_quad);
             quad.setHeight(tam_quad);
@@ -312,7 +312,7 @@ public class Tabuleiro {
         x -= (int) (largura / 4f);
         y -= (int) (altura * 0.375f);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             quad = new Rectangle();
             quad.setWidth(tam_quad);
             quad.setHeight(tam_quad);
@@ -329,7 +329,7 @@ public class Tabuleiro {
         x += (int) (largura / 4f);
         y -= (int) (altura * 0.375f);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             quad = new Rectangle();
             quad.setWidth(tam_quad);
             quad.setHeight(tam_quad);
@@ -346,7 +346,7 @@ public class Tabuleiro {
         x += (int) (largura / 4f);
         y += (int) (altura * 0.375f);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             quad = new Rectangle();
             quad.setWidth(tam_quad);
             quad.setHeight(tam_quad);
@@ -498,5 +498,13 @@ public class Tabuleiro {
 
     public int getValorDado() {
         return this.valor_dado;
+    }
+
+    public ArrayList<Integer> getXQuadFinais() {
+        return this.x_quad_finais;
+    }
+
+    public ArrayList<Integer> getYQuadFinais() {
+        return this.y_quad_finais;
     }
 }
