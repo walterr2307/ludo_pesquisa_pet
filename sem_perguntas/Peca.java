@@ -19,6 +19,7 @@ public class Peca {
     double x_base, y_base;
     boolean jogada_finalizada, minha_vez, jogar_dnv;
     String cor, tipo_pos, caminho, caminho_fundo, tipo_anterior;
+    Jogador jog;
     Image img_sem_fundo, img_com_fundo;
     ImageView img;
     Button botao;
@@ -26,7 +27,7 @@ public class Peca {
 
     public Peca(Pane root, String cor, double x_base, double y_base, ArrayList<Integer> x_quad_brancos,
             ArrayList<Integer> y_quad_brancos, ArrayList<Integer> x_quad_finais, ArrayList<Integer> y_quad_finais,
-            int largura) throws FileNotFoundException {
+            int largura, Jogador jog) throws FileNotFoundException {
         this.cor = cor;
         this.x_base = x_base;
         this.y_base = y_base;
@@ -37,6 +38,7 @@ public class Peca {
         this.jogada_finalizada = false;
         this.minha_vez = false;
         this.jogar_dnv = false;
+        this.jog = jog;
         this.constante = this.definirConstante(largura);
         this.img = this.definirImg(root, largura);
         this.botao = this.definirBotao(root, largura);
@@ -159,75 +161,88 @@ public class Peca {
     }
 
     public float mover() {
-        if (!this.tipo_pos.equals("linha_chegada")) {
-            if (this.tipo_pos.equals("base") && valor_dado == 6) {
-                pos_anterior = pos_atual;
-                tipo_anterior = tipo_pos;
+        if (this.tipo_pos.equals("linha_chegada")) {
+            return 0f;
+        } else if (this.tipo_pos.equals("base") && valor_dado == 6) {
+            pos_anterior = pos_atual;
+            tipo_anterior = tipo_pos;
 
-                this.sairDaBase();
-                this.tipo_pos = "quad_branco";
-                this.jogada_finalizada = true;
+            img.setViewOrder(-1f);
+            this.sairDaBase();
+            this.tipo_pos = "quad_branco";
+            this.jogada_finalizada = true;
 
-                return 0.75f;
-            } else if (tipo_pos.equals("quad_branco") || tipo_pos.equals("quad_final") && valor_dado + pos_atual <= 5) {
-                pos_anterior = pos_atual;
-                tipo_anterior = tipo_pos;
+            return 0.5f;
+        } else if (tipo_pos.equals("quad_branco") || tipo_pos.equals("quad_final") && valor_dado + pos_atual < 6) {
+            pos_anterior = pos_atual;
+            tipo_anterior = tipo_pos;
 
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {
-                    this.moverComPulo();
-                }));
+            img.setViewOrder(-1f);
 
-                timeline.setCycleCount(valor_dado);
-                timeline.play();
-                this.jogada_finalizada = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {
+                this.moverComPulo();
+            }));
 
-                return 0.5f * valor_dado;
-            }
+            timeline.setCycleCount(valor_dado);
+            timeline.play();
+            this.jogada_finalizada = true;
+
+            return 0.5f * valor_dado;
+        } else {
+            return 0f;
         }
 
-        return 0f;
     }
 
     private void sairDaBase() {
         float distancia, dx, dy;
-        TranslateTransition movimento1, movimento2;
+        TranslateTransition movimento_img, movimento_btn;
 
         dx = (float) (x_inicial - x_base);
         dy = (float) (y_inicial - y_base);
         distancia = (float) Math.sqrt(dx * dx + dy * dy);
 
-        movimento1 = new TranslateTransition(Duration.seconds(constante * distancia), img);
-        movimento2 = new TranslateTransition(Duration.seconds(constante * distancia), botao);
+        movimento_img = new TranslateTransition(Duration.seconds(constante * distancia), img);
+        movimento_btn = new TranslateTransition(Duration.seconds(constante * distancia), botao);
 
-        movimento1.setByX(dx);
-        movimento1.setByY(dy);
-        movimento1.play();
+        movimento_img.setByX(dx);
+        movimento_img.setByY(dy);
+        movimento_img.play();
 
-        movimento2.setByX(dx);
-        movimento2.setByY(dy);
-        movimento2.play();
+        movimento_btn.setByX(dx);
+        movimento_btn.setByY(dy);
+        movimento_btn.play();
 
         pos_atual = pos_inicial;
     }
 
     public int moverSemPulo() {
         float distancia, dx, dy;
-        TranslateTransition movimento1, movimento2;
+        TranslateTransition movimento_img, movimento_btn;
+
+        img.setViewOrder(-0.5f);
 
         dx = (float) (x_base - x_quad_brancos.get(pos_atual));
         dy = (float) (y_base - y_quad_brancos.get(pos_atual));
         distancia = (float) Math.sqrt(dx * dx + dy * dy);
 
-        movimento1 = new TranslateTransition(Duration.seconds(constante * distancia), img);
-        movimento2 = new TranslateTransition(Duration.seconds(constante * distancia), botao);
+        movimento_img = new TranslateTransition(Duration.seconds(constante * distancia), img);
+        movimento_btn = new TranslateTransition(Duration.seconds(constante * distancia), botao);
 
-        movimento1.setByX(dx);
-        movimento1.setByY(dy);
-        movimento1.play();
+        movimento_img.setByX(dx);
+        movimento_img.setByY(dy);
+        movimento_img.play();
 
-        movimento2.setByX(dx);
-        movimento2.setByY(dy);
-        movimento2.play();
+        movimento_btn.setByX(dx);
+        movimento_btn.setByY(dy);
+        movimento_btn.play();
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(constante * distancia), evento -> {
+            img.setViewOrder(0f);
+        }));
+
+        timeline.setCycleCount(1);
+        timeline.play();
 
         tipo_pos = "base";
         return (int) (constante * distancia * 1000f + 250f);
@@ -260,13 +275,11 @@ public class Peca {
     public void moverComPulo() {
         int prox_pos = (pos_atual + 1) % 52;
         double dx, dy;
-        TranslateTransition movimento1, movimento2;
+        TranslateTransition movimento_img, movimento_btn;
 
         if (pos_atual == pos_final && tipo_pos.equals("quad_branco")) {
             dx = (x_quad_finais[0] - x_quad_brancos.get(pos_atual));
             dy = (y_quad_finais[0] - y_quad_brancos.get(pos_atual));
-            tipo_pos = "quad_final";
-            System.out.println(tipo_pos);
         } else if (tipo_pos.equals("quad_final")) {
             dx = (x_quad_finais[prox_pos] - x_quad_finais[pos_atual]);
             dy = (y_quad_finais[prox_pos] - y_quad_finais[pos_atual]);
@@ -275,32 +288,42 @@ public class Peca {
             dy = (y_quad_brancos.get(prox_pos) - y_quad_brancos.get(pos_atual));
         }
 
-        movimento1 = new TranslateTransition(Duration.seconds(0.25), img);
-        movimento2 = new TranslateTransition(Duration.seconds(0.25), botao);
+        movimento_img = new TranslateTransition(Duration.seconds(0.25), img);
+        movimento_btn = new TranslateTransition(Duration.seconds(0.25), botao);
 
-        movimento1.setByX(dx);
-        movimento1.setByY(dy);
-        movimento1.play();
+        movimento_img.setByX(dx);
+        movimento_img.setByY(dy);
+        movimento_img.play();
 
-        movimento2.setByX(dx);
-        movimento2.setByY(dy);
-        movimento2.play();
+        movimento_btn.setByX(dx);
+        movimento_btn.setByY(dy);
+        movimento_btn.play();
 
         this.animarImagem();
 
-        if (pos_atual == pos_final)
+        if (pos_atual == pos_final && tipo_pos.equals("quad_branco")) {
             pos_atual = 0;
-        else
+            tipo_pos = "quad_final";
+        } else {
             pos_atual = prox_pos;
+        }
 
-        if (tipo_pos.equals("quad_final") && pos_atual == 5)
-            finalizar();
+        if (tipo_pos.equals("quad_final") && pos_atual == 5) {
+            this.finalizar();
+
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3f), evento -> {
+                this.img.setVisible(false);
+                jog.mostrarImagemChegada();
+            }));
+
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
     }
 
     private void finalizar() {
         this.jogar_dnv = true;
         this.tipo_pos = "linha_chegada";
-        this.img.setVisible(false);
         this.botao.setVisible(false);
         this.botao.setDisable(true);
     }
@@ -374,5 +397,9 @@ public class Peca {
 
     public boolean getJogarDeNovo() {
         return this.jogar_dnv;
+    }
+
+    public ImageView getImagem() {
+        return this.img;
     }
 }

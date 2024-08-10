@@ -6,7 +6,7 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "ludo_pesquisa_pet_e358699b",
+            "projectName": "sem_perguntas_60c6916b",
             "vmArgs": "--module-path C:\\Users\\Walter\\Documents\\java\\javafx-sdk-22.0.1\\lib --add-modules javafx.controls,javafx.fxml"
         },
         {

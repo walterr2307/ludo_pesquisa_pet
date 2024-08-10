@@ -15,6 +15,9 @@ public class Tabuleiro {
     private Jogador jog;
     private Button btn_girar_dado;
     private Circle circ_grandes[];
+    private Rectangle ret_dado;
+    private ImageView img_btn;
+    private Image imgs_dados[];
     private ArrayList<Integer> x_quad_brancos, y_quad_brancos;
     private ArrayList<Integer> x_quad_finais, y_quad_finais;
     private ArrayList<Double> x_bases, y_bases;
@@ -427,18 +430,52 @@ public class Tabuleiro {
         root.getChildren().addAll(circulo1, circulo2, circulo3, circulo4);
     }
 
-    private void gerarCaixaDados(Pane root, int largura, int altura) {
-        String estilo = String.format(
-                "-fx-border-color: black; -fx-border-width: 3px; -fx-font-family: 'Times New Roman'; -fx-font-size: %dpx;",
-                largura / 50);
+    private void gerarCaixaDados(Pane root, int largura, int altura) throws FileNotFoundException {
+        imgs_dados = new Image[6];
 
-        btn_girar_dado = new Button("0");
+        for (int i = 0; i < 6; i++) {
+            String caminho = String.format("imagens\\dado%d.png", i + 1);
+            imgs_dados[i] = new Image(new FileInputStream(caminho));
+        }
+
+        img_btn = new ImageView(imgs_dados[5]);
+        img_btn.setFitWidth(largura / 16f);
+        img_btn.setFitHeight(largura / 16f);
+        img_btn.setLayoutX(largura / 16f);
+        img_btn.setLayoutY(altura * (29f / 64f));
+
+        btn_girar_dado = new Button();
+        btn_girar_dado.setOpacity(0f);
         btn_girar_dado.setPrefSize(largura / 16f, largura / 16f);
         btn_girar_dado.setLayoutX(largura / 16f);
         btn_girar_dado.setLayoutY(altura * (29f / 64f));
-        btn_girar_dado.setStyle(estilo);
 
-        root.getChildren().addAll(btn_girar_dado);
+        ret_dado = new Rectangle();
+        ret_dado.setFill(Color.LIGHTGRAY);
+        ret_dado.setWidth(largura / 16f);
+        ret_dado.setHeight(largura / 16f);
+        ret_dado.setStroke(Color.BLACK);
+        ret_dado.setStrokeWidth(largura / 240f);
+        ret_dado.setLayoutX(largura / 16f);
+        ret_dado.setLayoutY(altura * (29f / 64f));
+
+        root.getChildren().addAll(ret_dado, img_btn, btn_girar_dado);
+    }
+
+    private void girarDados(int largura) {
+        valor_dado = (int) (Math.random() * 6 + 1);
+
+        img_btn.setImage(imgs_dados[valor_dado - 1]);
+        ret_dado.setFill(Color.web(jog.getCorHexadecimal()));
+        ret_dado.setOpacity(0.5);
+        btn_girar_dado.setDisable(true);
+        btn_ativado = false;
+
+        for (int i = 0; i < 4; i++) {
+            jog.getPeca(i).setValorDado(valor_dado);
+            jog.getPeca(i).getBotao().setDisable(false);
+        }
+
     }
 
     public ArrayList<Integer> getXQuadBrancos() {
@@ -459,25 +496,6 @@ public class Tabuleiro {
 
     public Button getBotao() {
         return this.btn_girar_dado;
-    }
-
-    private void girarDados(int largura) {
-        String formato = String.format(
-                "-fx-background-color: %s; -fx-border-color: black; -fx-border-width: 3px; -fx-font-family: 'Times New Roman'; -fx-font-size: %dpx;",
-                jog.getCorHexadecimal(), largura / 50);
-
-        valor_dado = (int) (Math.random() * 6 + 1);
-
-        btn_girar_dado.setDisable(true);
-        btn_girar_dado.setStyle(formato);
-        btn_girar_dado.setText(String.format("%d", valor_dado));
-        btn_ativado = false;
-
-        for (int i = 0; i < 4; i++) {
-            jog.getPeca(i).getBotao().setDisable(false);
-            jog.getPeca(i).setValorDado(valor_dado);
-        }
-
     }
 
     public void setJogador(Jogador jog) {
@@ -506,5 +524,9 @@ public class Tabuleiro {
 
     public ArrayList<Integer> getYQuadFinais() {
         return this.y_quad_finais;
+    }
+
+    public Rectangle getRetangulo() {
+        return this.ret_dado;
     }
 }

@@ -1,17 +1,22 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Jogatina {
     private int qtd_jogs, indice_atual;
+    private String primeira_cor;
+    private Stage stage;
     private Peca pecas_registradas[] = new Peca[52];
     private Jogador jog;
     private ArrayList<Jogador> jogs;
 
-    public Jogatina(int qtd_jogs) {
+    public Jogatina(int qtd_jogs, String primeira_cor, Stage stage) {
         this.jogs = new ArrayList<Jogador>();
         this.qtd_jogs = qtd_jogs;
+        this.primeira_cor = primeira_cor;
+        this.stage = stage;
         this.indice_atual = 0;
 
         for (int i = 0; i < 52; i++)
@@ -37,7 +42,7 @@ public class Jogatina {
     private void reajustarBotao(Tabuleiro tabuleiro) {
         tabuleiro.getBotao().setDisable(false);
         tabuleiro.setBotaoAtivado(true);
-
+        tabuleiro.getRetangulo().setOpacity(1);
     }
 
     private void ajustarVez(boolean minha_vez) {
@@ -68,7 +73,7 @@ public class Jogatina {
         }
     }
 
-    private void verificarVencedor(Stage stage) {
+    private void verificarVencedor() {
         boolean venceu = true;
 
         for (int i = 0; i < 4; i++) {
@@ -79,23 +84,58 @@ public class Jogatina {
         }
 
         if (venceu) {
-            stage.close();
+            Platform.runLater(() -> {
+                stage.close();
 
-            GameOver game_over = new GameOver(jog);
-            game_over.mostrarTela();
+                GameOver game_over = new GameOver(jog);
+                game_over.mostrarTela();
+            });
         }
     }
 
     public void ajustarJogadores(Pane root, String[] cores, int largura, Tabuleiro tabuleiro)
             throws FileNotFoundException {
+        if (qtd_jogs == 2) {
+            cores = new String[2];
+            cores[0] = primeira_cor;
 
-        for (int i = 0; i < qtd_jogs; i++)
+            switch (primeira_cor) {
+                case "verde":
+                    cores[1] = "vermelho";
+                    break;
+                case "amarelo":
+                    cores[1] = "azul";
+                    break;
+                case "vermelho":
+                    cores[1] = "verde";
+                    break;
+                default:
+                    cores[1] = "amarelo";
+            }
+        } else {
+            switch (primeira_cor) {
+                case "verde":
+                    indice_atual = 0;
+                    break;
+                case "amarelo":
+                    indice_atual = 1;
+                    break;
+                case "vermelho":
+                    indice_atual = 2;
+                    break;
+                default:
+                    indice_atual = 3;
+            }
+        }
+
+        for (int i = 0; i < qtd_jogs; i++) {
             jogs.add(new Jogador(root, largura, cores[i], tabuleiro));
+        }
     }
 
-    public void intercalarJogadores(Tabuleiro tabuleiro, Stage stage) {
+    public void intercalarJogadores(Tabuleiro tabuleiro) {
         // Obtém o primeiro jogador da lista de jogadores
-        jog = jogs.get(0);
+        jog = jogs.get(indice_atual);
 
         // Define o jogador no tabuleiro e pinta a borda de branco
         tabuleiro.setJogador(jog);
@@ -161,20 +201,18 @@ public class Jogatina {
                 jog.encontrarPecasIguais(peca);
                 jog.encontrarPecasDiferentes(peca, pecas_registradas);
                 jog.registrarMovimento(peca, pecas_registradas);
-                tempo_pausa = 250;
             } else {
-                tempo_pausa = 500;
                 this.reiniciarPecas();
-            }
 
-            try {
-                Thread.sleep(tempo_pausa);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             this.reajustarBotao(tabuleiro);
-            this.verificarVencedor(stage);
+            this.verificarVencedor();
             this.atualizarJogador(tabuleiro, peca);
         }
     }

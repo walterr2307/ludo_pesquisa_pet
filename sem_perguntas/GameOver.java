@@ -29,10 +29,10 @@ public class GameOver extends StackPane {
         else if (jog.getCor().equals("vermelho"))
             gameOverText = new Text("JOGADOR VERMELHO VENCEU!");
         else
-            gameOverText = new Text("JOGADOR VERDE VENCEU!");
+            gameOverText = new Text("JOGADOR AZUL VENCEU!");
 
         gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        gameOverText.setFill(Color.RED);
+        gameOverText.setFill(Color.web(jog.getCorHexadecimal()));
 
         // Organizar o layout com VBox
         VBox vbox = new VBox(10);
