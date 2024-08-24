@@ -1,6 +1,8 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -9,16 +11,21 @@ import javafx.scene.shape.Circle;
 
 public class Jogador {
     private int indice_img;
+    private boolean pergunta_acertada;
     private String cor, cor_hexa;
     private Circle circ_grande, circ_pequenos[];
     private Peca pecas[];
+    private TelaPerguntas tela_perguntas;
     private ImageView imgs_chegada[];
     private ArrayList<Integer> x_quad_brancos, y_quad_brancos;
     private ArrayList<Double> x_bases, y_bases;
 
-    public Jogador(Pane root, int largura, String cor, Tabuleiro tabuleiro) throws FileNotFoundException {
+    public Jogador(Pane root, int largura, String cor, Tabuleiro tabuleiro, TelaPerguntas tela_perguntas)
+            throws FileNotFoundException {
         this.indice_img = 0;
+        this.pergunta_acertada = true;
         this.cor = cor;
+        this.tela_perguntas = tela_perguntas;
         this.cor_hexa = this.definirCorHexadecimal();
         this.imgs_chegada = this.gerarImagensChegada(root, largura);
         this.x_bases = new ArrayList<Double>();
@@ -138,7 +145,8 @@ public class Jogador {
 
         for (int i = 0; i < 4; i++) {
             pecas[i] = new Peca(root, cor, this.x_bases.get(i), this.y_bases.get(i), this.x_quad_brancos,
-                    this.y_quad_brancos, tabuleiro.getXQuadFinais(), tabuleiro.getYQuadFinais(), largura, this);
+                    this.y_quad_brancos, tabuleiro.getXQuadFinais(), tabuleiro.getYQuadFinais(), largura, this,
+                    tela_perguntas);
         }
 
         return pecas;
@@ -202,7 +210,7 @@ public class Jogador {
         for (i = 0; i < 3; i++) {
             if (this.PosicaoIgual(peca, pecas_registradas)) {
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -236,40 +244,68 @@ public class Jogador {
         return igual;
     }
 
-    public void encontrarPecasDiferentes(Peca peca, Peca[] pecas_registradas) {
+    public boolean mostrarTela() {
+        tela_perguntas.gerarTela(cor);
+        pergunta_acertada = tela_perguntas.getPerguntaAcertada();
+
+        return pergunta_acertada;
+    }
+
+    public void encontrarPecasDiferentes(Peca peca1, Peca peca2, Jogatina jogatina) {
         int tempo_pausa;
+        String cor1 = peca1.getCor(), cor2 = peca2.getCor();
+        Peca copia;
+        CountDownLatch latch = new CountDownLatch(1);
 
         try {
-            Thread.sleep(300);
+            // Pausa de 500 milissegundos antes de iniciar a verificação
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // Tratamento de exceção em caso de interrupção da thread
+            e.printStackTrace();
+        }
+
+        if (cor1.equals(cor2))
+            return;
+
+        Platform.runLater(() -> {
+            try {
+                // Código que manipula a UI
+                mostrarTela();
+            } finally {
+                latch.countDown(); // Libera a thread que está aguardando
+            }
+        });
+
+        try {
+            latch.await(); // Faz a thread atual aguardar até que countDown() seja chamado
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        if (peca.getTipoPos().equals("quad_branco")) {
-            Peca peca_morta = pecas_registradas[peca.getPos()];
+        if (pergunta_acertada) {
+            peca1.setJogarDeNovo(true);
+        } else {
+            pergunta_acertada = true;
+            jogatina.setPecaVencedora(peca2);
+            copia = peca1;
+            peca1 = peca2;
+            peca2 = copia;
+        }
 
-            if (peca_morta == null)
-                return;
-            else if (peca_morta == peca)
-                return;
-            else if (peca_morta.getCor().equals(peca.getCor()))
-                return;
+        // Move a segunda peça sem pulo e armazena o tempo de pausa necessário
+        tempo_pausa = peca2.moverSemPulo();
 
-            tempo_pausa = peca_morta.moverSemPulo();
-
-            try {
-                Thread.sleep(tempo_pausa);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            peca.setJogarDeNovo(true);
+        try {
+            Thread.sleep(tempo_pausa); // Pausa a thread pelo tempo necessário para mover a peça
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // Tratamento de exceção em caso de interrupção da thread
         }
     }
 
-    public void registrarMovimento(Peca peca, Peca[] pecas_registradas) {
+    public void registrarMovimento(Peca peca, Peca peca_vencedora, Peca[] pecas_registradas) {
         try {
-            Thread.sleep(300);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -277,12 +313,20 @@ public class Jogador {
         if (peca.getTipoAnterior().equals("quad_branco"))
             pecas_registradas[peca.getPosAnterior()] = null;
         if (peca.getTipoPos().equals("quad_branco"))
-            pecas_registradas[peca.getPos()] = peca;
+            pecas_registradas[peca_vencedora.getPos()] = peca_vencedora;
 
         peca.getImagem().setViewOrder(0f);
     }
 
     public String getCor() {
         return this.cor;
+    }
+
+    public void setPerguntaAcertada(boolean pergunta_acertada) {
+        this.pergunta_acertada = pergunta_acertada;
+    }
+
+    public boolean getPerguntaAcertada() {
+        return this.pergunta_acertada;
     }
 }

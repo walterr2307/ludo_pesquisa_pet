@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "vmArgs": "--module-path C:/Users/Walter/Documents/java/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml -classpath C:/Users/Walter/Documents/java/gson-2.8.9.jar"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "com_perguntas_c5869f11",
+            "vmArgs": "--module-path C:/Users/Walter/Documents/java/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml -classpath C:/Users/Walter/Documents/java/gson-2.8.9.jar"
+        }
+    ]
+}

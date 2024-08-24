@@ -1,0 +1,242 @@
+[
+    {
+        "tema": "programacao_basica",
+        "pergunta": "O que é uma variável em programação?",
+        "0": "Um espaço na memória para armazenar valores",
+        "1": "Um conjunto de instruções",
+        "2": "Um tipo de função",
+        "3": "Um erro no código"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual dos seguintes tipos de laços é usado para repetir um bloco de código até que uma condição seja falsa?",
+        "0": "while",
+        "1": "if",
+        "2": "do-while",
+        "3": "for-each"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual operador é utilizado para comparar dois valores em uma expressão condicional?",
+        "0": "==",
+        "1": "=",
+        "2": "&&",
+        "3": "||"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual dos seguintes tipos é um tipo primitivo em Java?",
+        "0": "byte",
+        "1": "String",
+        "2": "Double",
+        "3": "Object"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual é a estrutura condicional que executa um bloco de código apenas se uma condição for verdadeira?",
+        "0": "if",
+        "1": "while",
+        "2": "do-while",
+        "3": "for"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual conceito de POO permite que uma classe herde as propriedades e métodos de outra classe?",
+        "0": "Herança",
+        "1": "Encapsulamento",
+        "2": "Polimorfismo",
+        "3": "Composição"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Em POO, qual termo se refere a criar múltiplos métodos com o mesmo nome, mas com diferentes parâmetros?",
+        "0": "Sobrecarga",
+        "1": "Herança",
+        "2": "Encapsulamento",
+        "3": "Abstração"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual conceito de POO refere-se à ocultação de detalhes de implementação e à exposição apenas do necessário?",
+        "0": "Encapsulamento",
+        "1": "Herança",
+        "2": "Polimorfismo",
+        "3": "Abstração"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual palavra-chave é usada para impedir que uma classe seja estendida?",
+        "0": "final",
+        "1": "private",
+        "2": "abstract",
+        "3": "static"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual modificador de acesso torna os membros de uma classe acessíveis apenas dentro da mesma classe?",
+        "0": "private",
+        "1": "protected",
+        "2": "public",
+        "3": "package-private"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para inserir novos dados em uma tabela?",
+        "0": "INSERT",
+        "1": "UPDATE",
+        "2": "SELECT",
+        "3": "DELETE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para remover linhas de uma tabela?",
+        "0": "DELETE",
+        "1": "DROP",
+        "2": "TRUNCATE",
+        "3": "REMOVE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para modificar dados existentes em uma tabela?",
+        "0": "UPDATE",
+        "1": "ALTER",
+        "2": "INSERT",
+        "3": "MODIFY"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é utilizado para criar uma nova tabela em um banco de dados?",
+        "0": "CREATE",
+        "1": "INSERT",
+        "2": "UPDATE",
+        "3": "ALTER"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para selecionar dados de uma tabela?",
+        "0": "SELECT",
+        "1": "UPDATE",
+        "2": "DELETE",
+        "3": "INSERT"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Quais dos itens a seguir possui apenas os tipos primitivos?",
+        "0": "int, double, char, boolean",
+        "1": "int, Double, char, float",
+        "2": "Integer, double, char, float",
+        "3": "int, double, String, boolean"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "O que é um algoritmo?",
+        "0": "Um conjunto de instruções para resolver um problema",
+        "1": "Um tipo de linguagem de programação",
+        "2": "Um erro que ocorre em um programa.",
+        "3": "Um tipo de variável em programação"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "O que é um array (ou vetor) em programação?",
+        "0": "Uma estrutura que armazena uma sequência de valores do mesmo tipo",
+        "1": "Uma variável que armazena um único valor",
+        "2": "Um tipo de função",
+        "3": "Um comando que altera o fluxo do programa"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual estrutura é usada para garantir que um bloco de código seja executado pelo menos uma vez, independentemente da condição?",
+        "0": "do-while",
+        "1": "if",
+        "2": "while",
+        "3": "for"
+    },
+    {
+        "tema": "programacao_basica",
+        "pergunta": "Qual é a linguagem de Marcação de HiperTexto?",
+        "0": "HTML",
+        "1": "CSS",
+        "2": "JSCRIPT",
+        "3": "TXT"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual conceito de POO refere-se à uma hierarquia entre classes?",
+        "0": "Herança",
+        "1": "Encapsulamento",
+        "2": "Polimorfismo",
+        "3": "Abstração"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual modificador de acesso é utilizado para que somente a classe mãe e filhas possam ter acesso aos atributos?",
+        "0": "protected",
+        "1": "private",
+        "2": "public",
+        "3": "package"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Em POO, o conceito que garante que nenhum acesso direto é concedido aos dados é atribuído por meio do(a)?",
+        "0": "Encapsulamento",
+        "1": "Polimorfismo",
+        "2": "Herança",
+        "3": "Abstração"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Qual a forma correta de escrever o nome de uma classe?",
+        "0": "class Pessoa",
+        "1": "class pessoa",
+        "2": "Class Pessoa",
+        "3": "Pessoa class"
+    },
+    {
+        "tema": "poo",
+        "pergunta": "Quais métodos utilizamos quando os atributos de uma classe estão com modificadores de acesso private?",
+        "0": "GET e SET",
+        "1": "POST e SET",
+        "2": "GET e POST",
+        "3": "GET e SETTER"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que significa a sigla SQL?",
+        "0": "Structured Query Language",
+        "1": "Sequential Query Language",
+        "2": "Simple Query Language",
+        "3": "System Query Language"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que significa Primary-key?",
+        "0": "Chave-primária",
+        "1": "Chave-estrangeira",
+        "2": "Chave-secundária",
+        "3": "Chave-candidata"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Quais as operações do CRUD?",
+        "0": "CREATE, READ, UPDATE, DELETE",
+        "1": "CREATE, READ, ALTER, DELETE",
+        "2": "SELECT, READ, UPDATE, DELETE",
+        "3": "CREATE, RESET, UPDATE, DELETE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que significa a sigla ER?",
+        "0": "Entidade Relacionamento",
+        "1": "Entidade Resposta",
+        "2": "Entidade Reserva",
+        "3": "Entidade Recursiva"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual a função da Foreign-key?",
+        "0": "Relacionar duas ou mais tabelas",
+        "1": "Armazenar dados temporários",
+        "2": "Identificar unicamente uma linha na tabela",
+        "3": "Atualizar dados em uma tabela"
+    }
+]
