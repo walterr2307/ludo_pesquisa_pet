@@ -5,7 +5,7 @@
         "0": "Um espaço na memória para armazenar valores",
         "1": "Um conjunto de instruções",
         "2": "Um tipo de função",
-        "4": "Um erro no código"
+        "3": "Um erro no código"
     },
     {
         "tema": "programacao_basica",
@@ -13,7 +13,7 @@
         "0": "while",
         "1": "if",
         "2": "do-while",
-        "4": "for-each"
+        "3": "for-each"
     },
     {
         "tema": "programacao_basica",
@@ -21,7 +21,7 @@
         "0": "==",
         "1": "=",
         "2": "&&",
-        "4": "||"
+        "3": "||"
     },
     {
         "tema": "programacao_basica",
@@ -29,7 +29,7 @@
         "0": "byte",
         "1": "String",
         "2": "Double",
-        "4": "Object"
+        "3": "Object"
     },
     {
         "tema": "programacao_basica",
@@ -37,7 +37,7 @@
         "0": "if",
         "1": "while",
         "2": "do-while",
-        "4": "for"
+        "3": "for"
     },
     {
         "tema": "poo",
@@ -45,7 +45,7 @@
         "0": "Herança",
         "1": "Encapsulamento",
         "2": "Polimorfismo",
-        "4": "Composição"
+        "3": "Composição"
     },
     {
         "tema": "poo",
@@ -53,7 +53,7 @@
         "0": "Sobrecarga",
         "1": "Herança",
         "2": "Encapsulamento",
-        "4": "Abstração"
+        "3": "Abstração"
     },
     {
         "tema": "poo",
@@ -61,7 +61,7 @@
         "0": "Abstração",
         "1": "Herança",
         "2": "Polimorfismo",
-        "4": "Encapsulamento"
+        "3": "Encapsulamento"
     },
     {
         "tema": "poo",
@@ -69,7 +69,7 @@
         "0": "final",
         "1": "private",
         "2": "abstract",
-        "4": "static"
+        "3": "static"
     },
     {
         "tema": "poo",
@@ -77,7 +77,7 @@
         "0": "private",
         "1": "protected",
         "2": "public",
-        "4": "package-private"
+        "3": "package-private"
     },
     {
         "tema": "banco_dados",
@@ -85,7 +85,7 @@
         "0": "INSERT",
         "1": "UPDATE",
         "2": "SELECT",
-        "4": "DELETE"
+        "3": "DELETE"
     },
     {
         "tema": "banco_dados",
@@ -93,7 +93,7 @@
         "0": "DELETE",
         "1": "DROP",
         "2": "TRUNCATE",
-        "4": "REMOVE"
+        "3": "REMOVE"
     },
     {
         "tema": "banco_dados",
@@ -101,7 +101,7 @@
         "0": "UPDATE",
         "1": "ALTER",
         "2": "INSERT",
-        "4": "MODIFY"
+        "3": "MODIFY"
     },
     {
         "tema": "banco_dados",
@@ -109,7 +109,7 @@
         "0": "CREATE",
         "1": "INSERT",
         "2": "UPDATE",
-        "4": "ALTER"
+        "3": "ALTER"
     },
     {
         "tema": "banco_dados",
@@ -117,7 +117,7 @@
         "0": "SELECT",
         "1": "UPDATE",
         "2": "DELETE",
-        "4": "INSERT"
+        "3": "INSERT"
     },
     {
         "tema": "programacao_basica",
@@ -125,7 +125,7 @@
         "0": "int, double, char, boolean",
         "1": "int, Double, char, float",
         "2": "Integer, double, char, float",
-        "4": "int, double, String, boolean"
+        "3": "int, double, String, boolean"
     },
     {
         "tema": "programacao_basica",
@@ -133,7 +133,7 @@
         "0": "Um conjunto de instruções para resolver um problema",
         "1": "Um tipo de linguagem de programação",
         "2": "Um erro que ocorre em um programa.",
-        "4": "Um tipo de variável em programação"
+        "3": "Um tipo de variável em programação"
     },
     {
         "tema": "programacao_basica",
@@ -141,7 +141,7 @@
         "0": "Uma estrutura que armazena uma sequência de valores do mesmo tipo",
         "1": "Uma variável que armazena um único valor",
         "2": "Um tipo de função",
-        "4": "Um comando que altera o fluxo do programa"
+        "3": "Um comando que altera o fluxo do programa"
     },
     {
         "tema": "programacao_basica",
@@ -149,7 +149,7 @@
         "0": "do-while",
         "1": "if",
         "2": "while",
-        "4": "for"
+        "3": "for"
     },
     {
         "tema": "programacao_basica",
@@ -157,7 +157,7 @@
         "0": "HTML",
         "1": "CSS",
         "2": "JSCRIPT",
-        "4": "TXT"
+        "3": "TXT"
     },
     {
         "tema": "poo",
@@ -165,7 +165,7 @@
         "0": "Herança",
         "1": "Encapsulamento",
         "2": "Polimorfismo",
-        "4": "Abstração"
+        "3": "Abstração"
     },
     {
         "tema": "poo",
@@ -173,7 +173,7 @@
         "0": "protected",
         "1": "private",
         "2": "public",
-        "4": "package"
+        "3": "package"
     },
     {
         "tema": "poo",
@@ -181,7 +181,7 @@
         "0": "Encapsulamento",
         "1": "Polimorfismo",
         "2": "Herança",
-        "4": "Abstração"
+        "3": "Abstração"
     },
     {
         "tema": "poo",
@@ -189,7 +189,7 @@
         "0": "class Pessoa",
         "1": "class pessoa",
         "2": "Class Pessoa",
-        "4": "Pessoa class"
+        "3": "Pessoa class"
     },
     {
         "tema": "poo",
@@ -197,7 +197,7 @@
         "0": "GET e SET",
         "1": "POST e SET",
         "2": "GET e POST",
-        "4": "GET e SETTER"
+        "3": "GET e SETTER"
     },
     {
         "tema": "banco_dados",
@@ -205,7 +205,7 @@
         "0": "Structured Query Language",
         "1": "Sequential Query Language",
         "2": "Simple Query Language",
-        "4": "System Query Language"
+        "3": "System Query Language"
     },
     {
         "tema": "banco_dados",
@@ -213,7 +213,7 @@
         "0": "Chave-primária",
         "1": "Chave-estrangeira",
         "2": "Chave-secundária",
-        "4": "Chave-candidata"
+        "3": "Chave-candidata"
     },
     {
         "tema": "banco_dados",
@@ -221,7 +221,7 @@
         "0": "CREATE, READ, UPDATE, DELETE",
         "1": "CREATE, READ, ALTER, DELETE",
         "2": "SELECT, READ, UPDATE, DELETE",
-        "4": "CREATE, RESET, UPDATE, DELETE"
+        "3": "CREATE, RESET, UPDATE, DELETE"
     },
     {
         "tema": "banco_dados",
@@ -229,7 +229,7 @@
         "0": "Chave-estrangeira",
         "1": "Chave-candidata",
         "2": "Chave-primária",
-        "4": "Chave-secundária"
+        "3": "Chave-secundária"
     },
     {
         "tema": "banco_dados",
@@ -237,127 +237,127 @@
         "0": "Não pode ter espaços",
         "1": "Pode conter apenas números",
         "2": "Deve ser escrito em letras maiúsculas",
-        "4": "Pode conter acentuação"
+        "3": "Pode conter acentuação"
     },
     {
-        "tipo": "programacao_basica",
+        "tema": "programacao_basica",
         "pergunta": "Em programação, 'variável' é um nome usado para representar:",
         "0": "uma posição de memória identificada.",
         "1": "uma palavra que armazena informações no disco.",
         "2": "um número ou letra ou ponto-flutuante.",
-        "4": "um resultado de uma operação matemática."
+        "3": "um resultado de uma operação matemática."
     },
     {
-        "tipo": "programacao_basica",
+        "tema": "programacao_basica",
         "pergunta": "Qual a estrutura de repetição que mais adequada quando se precisa que o bloco de código seja executado pelo menos uma vez?",
         "0": "Do-While",
         "1": "While",
         "2": "For",
-        "4": "If-else"
+        "3": "If-else"
     },
     {
-        "tipo": "programacao_basica",
+        "tema": "programacao_basica",
         "pergunta": "Qual dos seguintes é um operador aritmético em muitas linguagens de programação?",
         "0": "+",
         "1": "&&",
         "2": "||",
-        "4": "!"
+        "3": "!"
     },
     {
-        "tipo": "programacao_basica",
+        "tema": "programacao_basica",
         "pergunta": "Qual é a função do comando return em uma função?",
         "0": "Retorna um valor da função para o ponto onde foi chamada",
         "1": "Finaliza a execução de um loop",
         "2": "Inicia uma nova função",
-        "4": "Declara uma variável"
+        "3": "Declara uma variável"
     },
     {
-        "tipo": "programacao_basica",
+        "tema": "programacao_basica",
         "pergunta": "Quais são as três estruturas lógicas corretas entre as opções abaixo?",
         "0": "AND, OR e NOT",
         "1": "IF, AND e NOT",
         "2": "IF, ELSE e AND",
-        "4": "FOR, IF e ELSE"
+        "3": "FOR, IF e ELSE"
     },
     {
-        "tipo": "poo",
+        "tema": "poo",
         "pergunta": "A programação orientada a objetos:",
         "0": "faz uso de conceitos como classe, interfaces e envio de mensagens.",
         "1": "impede a construção de software de difícil manutenção.",
         "2": "impossibilita o polimorfismo sem herança (extends em JAVA).",
-        "4": "requer que classes sejam estendidas para a reutilização de código."
+        "3": "requer que classes sejam estendidas para a reutilização de código."
     },
     {
-        "tipo": "poo",
+        "tema": "poo",
         "pergunta": "Em um programa orientado a objetos, quando dizemos que uma classe A estende a classe B, queremos dizer que:",
         "0": "A classe A é derivada de B.",
         "1": "A classe A é superclasse de B.",
         "2": "A classe B é derivada de A.",
-        "4": "A classe B é superclasse de A."
+        "3": "A classe B é superclasse de A."
     },
     {
-        "tipo": "poo",
+        "tema": "poo",
         "pergunta": "Qual das características abaixo não é fundamental para uma linguagem de programação ser considerada orientada a objetos:",
         "0": "Processamento.",
         "1": "Encapsulamento.",
         "2": "Abstração.",
-        "4": "Hierarquia."
+        "3": "Hierarquia."
     },
     {
-        "tipo": "poo",
+        "tema": "poo",
         "pergunta": "A habilidade de uma variável de objeto em assumir formas diferentes é chamada de: ",
         "0": "Polimorfismo",
         "1": "Interface",
         "2": "Abstração",
-        "4": "Encapsulamento"
+        "3": "Encapsulamento"
     },
     {
-        "tipo": "poo",
+        "tema": "poo",
         "pergunta": "o mecanismo pelo qual dois métodos de mesma classe podem ter mesmo nome, desde que suas listas de parâmetros sejam diferentes, é chamado de:",
         "0": "sobrecarga",
         "1": "assinatura",
         "2": "polimorfismo",
-        "4": "encapsulação"
+        "3": "encapsulação"
     },
     {
-        "tipo": "banco_dados",
+        "tema": "banco_dados",
         "pergunta": "Uma coleção de dados inter-relacionados e uma coleção de programas para acesso a esse banco de dados é um(a):",
         "0": "SGBD.",
         "1": "visão.",
         "2": "índice.",
-        "4": "tabela."
+        "3": "tabela."
     },
     {
-        "tipo": "banco_dados",
+        "tema": "banco_dados",
         "pergunta": "Assinale a alternativa que NÃO é um tipo de atributo presente em bancos de dados.",
         "0": "Atributo redundante.",
         "1": "Atributo multivalorado.",
         "2": "Atributo Simples.",
-        "4": "Atributo chave."
+        "3": "Atributo chave."
     },
     {
-        "tipo": "banco_dados",
+        "tema": "banco_dados",
         "pergunta": "Qual  o comando SQL para apagar uma tabela de um banco de dados?",
         "0": "DROP TABLE",
         "1": "KILLTAB",
         "2": "DELETE",
-        "4": "ERASE"
+        "3": "ERASE"
     },
     {
-        "tipo": "banco_dados",
+        "tema": "banco_dados",
         "pergunta": "Qual o nome do atributo que deve existir em outra relação como identificador único?",
         "0": "chave estrangeira",
         "1": "chave candidata",
         "2": "chave primária",
-        "4": "chave índice"
+        "3": "chave índice"
     },
     {
-        "tipo": "banco_dados",
+        "tema": "banco_dados",
         "pergunta": "Qual o comando utilizado para adicionar, remover ou modificar colunas de tabelas de bancos de dados SQL.",
         "0": "alter",
         "1": "create",
         "2": "update",
-        "4": "insert"
+        "3": "insert"
     },
     {
         "tema": "programacao_basica",
@@ -365,7 +365,7 @@
         "0": "&&",
         "1": "||",
         "2": "!",
-        "4": "&"
+        "3": "&"
     },
     {
         "tema": "banco_dados",
@@ -373,7 +373,7 @@
         "0": "Relacional",
         "1": "Não-relacional",
         "2": "Documental",
-        "4": "Orientado a grafos"
+        "3": "Orientado a grafos"
     },
     {
         "tema": "banco_dados",
@@ -381,7 +381,7 @@
         "0": "Um identificador único para cada registro na tabela",
         "1": "Uma coluna que armazena valores duplicados",
         "2": "Um conjunto de colunas que identificam unicamente uma linha",
-        "4": "Um valor que referencia uma chave estrangeira"
+        "3": "Um valor que referencia uma chave estrangeira"
     },
     {
         "tema": "programacao_basica",
@@ -389,7 +389,7 @@
         "0": "Uso de '=' em vez de '==' para comparação",
         "1": "Uso de ';' após a condição",
         "2": "Falta de chaves `{}` para delimitar o bloco de código",
-        "4": "Uso de uma variável não inicializada"
+        "3": "Uso de uma variável não inicializada"
     },
     {
         "tema": "programacao_basica",
@@ -397,7 +397,7 @@
         "0": "Esquecer de incluir o comando `break` após cada caso",
         "1": "Usar expressões booleanas em vez de valores constantes",
         "2": "Não incluir um `default`",
-        "4": "Usar múltiplos `default` cases"
+        "3": "Usar múltiplos `default` cases"
     },
     {
         "tema": "banco_dados",
@@ -405,7 +405,7 @@
         "0": "Pode resultar em consumo excessivo de memória",
         "1": "Pode omitir colunas importantes",
         "2": "Pode gerar um erro de sintaxe",
-        "4": "Pode causar perda de dados"
+        "3": "Pode causar perda de dados"
     },
     {
         "tema": "banco_dados",
@@ -413,7 +413,7 @@
         "0": "LEFT JOIN",
         "1": "INNER JOIN",
         "2": "RIGHT JOIN",
-        "4": "FULL OUTER JOIN"
+        "3": "FULL OUTER JOIN"
     },
     {
         "tema": "banco_dados",
@@ -421,7 +421,7 @@
         "0": "INNER JOIN",
         "1": "LEFT JOIN",
         "2": "RIGHT JOIN",
-        "4": "FULL OUTER JOIN"
+        "3": "FULL OUTER JOIN"
     },
     {
         "tema": "banco_dados",
@@ -429,7 +429,7 @@
         "0": "FULL OUTER JOIN",
         "1": "LEFT JOIN",
         "2": "INNER JOIN",
-        "4": "CROSS JOIN"
+        "3": "CROSS JOIN"
     },
     {
         "tema": "programacao_basica",
@@ -437,7 +437,7 @@
         "0": "PUT",
         "1": "POST",
         "2": "GET",
-        "4": "DELETE"
+        "3": "DELETE"
     },
     {
         "tema": "programacao_basica",
@@ -445,7 +445,7 @@
         "0": "DELETE",
         "1": "POST",
         "2": "GET",
-        "4": "PUT"
+        "3": "PUT"
     },
     {
         "tema": "programacao_basica",
@@ -453,7 +453,7 @@
         "0": "POST",
         "1": "GET",
         "2": "PUT",
-        "4": "DELETE"
+        "3": "DELETE"
     },
     {
         "tema": "programacao_basica",
@@ -461,7 +461,7 @@
         "0": "+",
         "1": "&",
         "2": "*",
-        "4": "/"
+        "3": "/"
     },
     {
         "tema": "programacao_basica",
@@ -469,7 +469,7 @@
         "0": "11",
         "1": "16",
         "2": "13",
-        "4": "10"
+        "3": "10"
     },
     {
         "tema": "programacao_basica",
@@ -477,7 +477,7 @@
         "0": "Ser o ponto de entrada da aplicação",
         "1": "Definir a única classe da aplicação",
         "2": "Inicializar variáveis globais",
-        "4": "Gerar relatórios de erro"
+        "3": "Gerar relatórios de erro"
     },
     {
         "tema": "programacao_basica",
@@ -485,7 +485,7 @@
         "0": "System.out.println",
         "1": "print",
         "2": "echo",
-        "4": "display"
+        "3": "display"
     },
     {
         "tema": "programacao_basica",
@@ -493,6 +493,6 @@
         "0": "8",
         "1": "5",
         "2": "3",
-        "4": "10"
+        "3": "10"
     }
 ]
