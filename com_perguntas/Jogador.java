@@ -3,16 +3,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 public class Jogador {
     private int indice_img;
     private boolean pergunta_acertada;
-    private String cor, cor_hexa;
+    private String cor, cor_hexa, cor_escura, formato_caixa_branca, formato_caixa_preta;
+    private Button caixa_nome;
     private Circle circ_grande, circ_pequenos[];
     private Peca pecas[];
     private TelaPerguntas tela_perguntas;
@@ -20,13 +23,15 @@ public class Jogador {
     private ArrayList<Integer> x_quad_brancos, y_quad_brancos;
     private ArrayList<Double> x_bases, y_bases;
 
-    public Jogador(Pane root, int largura, String cor, Tabuleiro tabuleiro, TelaPerguntas tela_perguntas)
+    public Jogador(Pane root, int largura, String cor, String nome, Tabuleiro tabuleiro, TelaPerguntas tela_perguntas)
             throws FileNotFoundException {
         this.indice_img = 0;
         this.pergunta_acertada = true;
         this.cor = cor;
         this.tela_perguntas = tela_perguntas;
         this.cor_hexa = this.definirCorHexadecimal();
+        this.cor_escura = this.definirCorEscura();
+        this.caixa_nome = this.definirCaixaNome(nome, largura, root);
         this.imgs_chegada = this.gerarImagensChegada(root, largura);
         this.x_bases = new ArrayList<Double>();
         this.y_bases = new ArrayList<Double>();
@@ -35,10 +40,37 @@ public class Jogador {
         this.setYBases(tabuleiro.getYBases());
         this.setXQuadBrancos(tabuleiro.getXQuadBrancos());
         this.setYQuadBrancos(tabuleiro.getYQuadBrancos());
+        this.definirFormatos(largura);
 
         this.circ_pequenos = this.setCirculosPequenos(tabuleiro.getCirculosPequenos());
         this.circ_grande = this.setCirculoGrande(tabuleiro.getCirculosGrandes());
         this.pecas = this.gerarPecas(root, largura, tabuleiro);
+    }
+
+    private void definirFormatos(int largura) {
+        int tam = (int) (largura / 480f);
+
+        formato_caixa_preta = String.format(
+                "-fx-background-color: %s; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: %dpx;",
+                cor_escura, tam);
+        formato_caixa_branca = String.format(
+                "-fx-background-color: %s; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: %dpx;",
+                cor_escura, tam);
+    }
+
+    private String definirCorEscura() {
+        String cor_escura;
+
+        if (this.cor.equals("verde"))
+            cor_escura = "#008B00";
+        else if (this.cor.equals("amarelo"))
+            cor_escura = "#B8860B";
+        else if (this.cor.equals("vermelho"))
+            cor_escura = "#8B0000";
+        else
+            cor_escura = "#00008B";
+
+        return cor_escura;
     }
 
     private String definirCorHexadecimal() {
@@ -169,6 +201,37 @@ public class Jogador {
         return imgs_chegada;
     }
 
+    private Button definirCaixaNome(String nome, int largura, Pane root) {
+        int x, y, tam = (int) (largura / 480f);
+        Button caixa_nome = new Button(nome);
+        String formato = String.format(
+                "-fx-background-color: %s; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: %dpx;",
+                cor_escura, tam);
+
+        if (cor.equals("verde")) {
+            x = (int) (largura / 16f);
+            y = (int) (largura * (59f / 96f));
+        } else if (cor.equals("amarelo")) {
+            x = (int) (largura / 16f);
+            y = (int) (largura / 48f);
+        } else if (cor.equals("vermelho")) {
+            x = (int) (largura * (39f / 48f));
+            y = (int) (largura / 48f);
+        } else {
+            x = (int) (largura * (39f / 48f));
+            y = (int) (largura * (59f / 96f));
+        }
+
+        caixa_nome.setPrefSize(largura / 8f, largura / 32f);
+        caixa_nome.setLayoutX(x);
+        caixa_nome.setLayoutY(y);
+        caixa_nome.setFont(Font.font(largura / 80f));
+        caixa_nome.setStyle(formato);
+        root.getChildren().add(caixa_nome);
+
+        return caixa_nome;
+    }
+
     public void mostrarImagemChegada() {
         this.imgs_chegada[this.indice_img].setVisible(true);
         ++this.indice_img;
@@ -180,11 +243,15 @@ public class Jogador {
 
             for (int i = 0; i < 4; i++)
                 circ_pequenos[i].setStroke(Color.WHITE);
+
+            caixa_nome.setStyle(formato_caixa_branca);
         } else {
             circ_grande.setStroke(Color.BLACK);
 
             for (int i = 0; i < 4; i++)
                 circ_pequenos[i].setStroke(Color.BLACK);
+
+            caixa_nome.setStyle(formato_caixa_preta);
         }
     }
 
@@ -210,7 +277,7 @@ public class Jogador {
         for (i = 0; i < 3; i++) {
             if (this.PosicaoIgual(peca, pecas_registradas)) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(750);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

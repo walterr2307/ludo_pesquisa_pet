@@ -1,15 +1,20 @@
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class TelaPerguntas {
     // Variáveis de instância para armazenar propriedades da tela e informações
     // sobre as perguntas
     private int largura, altura, indice_pergunta, num_perguntas;
+    private boolean pergunta_acertada;
     private String resposta, temas[], perguntas[], resp_corretas[], respostas[][];
     private LeitorJson leitor_json;
+    private Button caixa_pergunta;
     private Stage stage;
 
     // Construtor que inicializa as variáveis com os valores recebidos e carrega os
@@ -31,24 +36,25 @@ public class TelaPerguntas {
     public void gerarTela(String cor) {
         float y_botao = altura * 0.4f; // Coordenada Y inicial para o posicionamento dos botões de resposta
         String formato;
-        Button caixa_pergunta = new Button(), btn_respostas[] = new Button[4];
+        Button btn_respostas[] = new Button[4];
         Pane root = new Pane(); // Painel principal onde os elementos da UI são adicionados
         Scene scene = new Scene(root, largura, altura); // Cena que contém o layout da tela
         Stage stage = new Stage();
+
+        caixa_pergunta = new Button();
 
         stage.initModality(Modality.APPLICATION_MODAL);
         cor = retornarCorHexadecimal(cor); // Converte o nome da cor para seu equivalente hexadecimal
         stage.setResizable(false); // Impede a redimensionamento da janela
 
         // Impede o fechamento da janela quando o usuário tenta fechá-la
-        stage.setOnCloseRequest(event -> {
-            event.consume();
-        });
+        stage.setOnCloseRequest(event -> event.consume());
 
         // Configura a caixa de pergunta (tamanho, posição e estilo)
         caixa_pergunta.setPrefSize(largura * 0.8f, altura * 0.3f);
         caixa_pergunta.setLayoutX(largura / 10f);
         caixa_pergunta.setLayoutY(altura / 20f);
+        caixa_pergunta.setFont(Font.font(largura / 40f));
         caixa_pergunta.setText(perguntas[indice_pergunta]); // Define o texto da pergunta atual
         caixa_pergunta.setWrapText(true); // Permite que o texto da pergunta quebre em várias linhas
         caixa_pergunta.setStyle(
@@ -62,6 +68,7 @@ public class TelaPerguntas {
                     cor);
 
             btn_respostas[i] = new Button();
+            btn_respostas[i].setFont(Font.font(largura / 50f));
             btn_respostas[i].setPrefSize(largura * 0.8f, altura * 0.1f);
             btn_respostas[i].setLayoutX(largura / 10f);
             btn_respostas[i].setLayoutY(y_botao);
@@ -82,15 +89,7 @@ public class TelaPerguntas {
 
     // Método que verifica se a resposta escolhida pelo usuário está correta
     public boolean getPerguntaAcertada() {
-        boolean pergunta_acertada;
-
         stage.showAndWait();
-
-        // Compara a resposta do usuário com a resposta correta
-        if (resposta.equals(resp_corretas[indice_pergunta]))
-            pergunta_acertada = true;
-        else
-            pergunta_acertada = false;
 
         ++indice_pergunta; // Passa para a próxima pergunta
         resposta = null;
@@ -120,19 +119,31 @@ public class TelaPerguntas {
             final int indice_botao = i;
 
             botoes[i].setOnAction(evento -> {
+                String msg;
                 resposta = respostas[indice_botao][indice_pergunta]; // Armazena a resposta selecionada
 
-                // Desativa todos os botões após uma resposta ser escolhida
-                for (int j = 0; j < 4; j++)
-                    botoes[j].setDisable(true);
-
-                try {
-                    Thread.sleep(500); // Pausa a execução temporariamente
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                // Compara a resposta do usuário com a resposta correta
+                if (resposta.equals(resp_corretas[indice_pergunta])) {
+                    msg = "ACERTOU!";
+                    pergunta_acertada = true;
+                } else {
+                    msg = "ERROU!";
+                    pergunta_acertada = false;
                 }
 
-                stage.close(); // Fecha a janela
+                caixa_pergunta.setText(msg);
+                caixa_pergunta.setFont(Font.font(largura / 20f));
+
+                // Desativa todos os botões após uma resposta ser escolhida
+                for (int j = 0; j < 4; j++) {
+                    botoes[j].setDisable(true);
+                }
+
+                // Pausa a execução por 1 segundo antes de fechar a janela, sem bloquear a
+                // interface gráfica
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.75f));
+                pause.setOnFinished(event -> stage.close());
+                pause.play();
             });
         }
     }

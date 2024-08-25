@@ -6,15 +6,16 @@ import javafx.stage.Stage;
 
 public class Jogatina {
     private int qtd_jogs, indice_atual;
-    private String primeira_cor;
+    private String primeira_cor, nomes[];
     private Stage stage;
     private Peca peca_vencedora, pecas_registradas[] = new Peca[52];
     private TelaPerguntas tela_perguntas;
     private Jogador jog;
     private ArrayList<Jogador> jogs;
 
-    public Jogatina(int qtd_jogs, String primeira_cor, Stage stage, TelaPerguntas tela_Perguntas) {
+    public Jogatina(int qtd_jogs, String primeira_cor, String nomes[], Stage stage, TelaPerguntas tela_Perguntas) {
         this.tela_perguntas = tela_Perguntas;
+        this.nomes = nomes;
         this.jogs = new ArrayList<Jogador>();
         this.qtd_jogs = qtd_jogs;
         this.primeira_cor = primeira_cor;
@@ -97,41 +98,20 @@ public class Jogatina {
 
     public void ajustarJogadores(Pane root, String[] cores, int largura, Tabuleiro tabuleiro)
             throws FileNotFoundException {
-        if (qtd_jogs == 2) {
-            cores = new String[2];
-            cores[0] = primeira_cor;
 
-            switch (primeira_cor) {
-                case "verde":
-                    cores[1] = "vermelho";
-                    break;
-                case "amarelo":
-                    cores[1] = "azul";
-                    break;
-                case "vermelho":
-                    cores[1] = "verde";
-                    break;
-                default:
-                    cores[1] = "amarelo";
-            }
-        } else {
-            switch (primeira_cor) {
-                case "verde":
-                    indice_atual = 0;
-                    break;
-                case "amarelo":
-                    indice_atual = 1;
-                    break;
-                case "vermelho":
-                    indice_atual = 2;
-                    break;
-                default:
-                    indice_atual = 3;
-            }
+        if (qtd_jogs == 4) {
+            if (primeira_cor.equals("verde"))
+                indice_atual = 0;
+            if (primeira_cor.equals("amarelo"))
+                indice_atual = 1;
+            if (primeira_cor.equals("vermelho"))
+                indice_atual = 2;
+            if (primeira_cor.equals("azul"))
+                indice_atual = 0;
         }
 
         for (int i = 0; i < qtd_jogs; i++) {
-            jogs.add(new Jogador(root, largura, cores[i], tabuleiro, tela_perguntas));
+            jogs.add(new Jogador(root, largura, cores[i], nomes[i], tabuleiro, tela_perguntas));
         }
     }
 
