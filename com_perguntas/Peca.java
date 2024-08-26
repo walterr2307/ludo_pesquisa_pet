@@ -68,7 +68,7 @@ public class Peca {
         boolean pergunta_acertada;
 
         if (this.tipo_pos.equals("base") && valor_dado == 6
-                || tipo_pos.equals("quad_final") && valor_dado + pos_atual < 6) {
+                || tipo_pos.equals("quad_final") && valor_dado + pos_atual == 6) {
 
             tela_perguntas.gerarTela(cor);
             pergunta_acertada = tela_perguntas.getPerguntaAcertada();

@@ -195,6 +195,14 @@ public class Jogatina {
                 jog.encontrarPecasIguais(peca);
                 peca2 = pecas_registradas[peca.getPos()];
 
+                try {
+                    // Pausa de 500 milissegundos antes de iniciar a verificação
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    // Tratamento de exceção em caso de interrupção da thread
+                    e.printStackTrace();
+                }
+
                 if (peca.getTipoPos().equals("quad_branco") && peca2 != null)
                     jog.encontrarPecasDiferentes(peca, peca2, this);
 

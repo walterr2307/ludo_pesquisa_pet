@@ -324,14 +324,6 @@ public class Jogador {
         Peca copia;
         CountDownLatch latch = new CountDownLatch(1);
 
-        try {
-            // Pausa de 500 milissegundos antes de iniciar a verificação
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            // Tratamento de exceção em caso de interrupção da thread
-            e.printStackTrace();
-        }
-
         if (cor1.equals(cor2))
             return;
 
