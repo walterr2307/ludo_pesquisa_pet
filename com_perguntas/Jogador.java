@@ -379,7 +379,7 @@ public class Jogador {
 
         if (peca.getTipoAnterior().equals("quad_branco"))
             pecas_registradas[peca.getPosAnterior()] = null;
-        if (peca.getTipoPos().equals("quad_branco"))
+        if (peca_vencedora.getTipoPos().equals("quad_branco"))
             pecas_registradas[peca_vencedora.getPos()] = peca_vencedora;
 
         peca.getImagem().setViewOrder(0f);
