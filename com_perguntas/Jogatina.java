@@ -196,8 +196,8 @@ public class Jogatina {
                 peca2 = pecas_registradas[peca.getPos()];
 
                 try {
-                    // Pausa de 500 milissegundos antes de iniciar a verificação
-                    Thread.sleep(500);
+                    // Pausa de 250 milissegundos antes de iniciar a verificação
+                    Thread.sleep(250);
                 } catch (InterruptedException e) {
                     // Tratamento de exceção em caso de interrupção da thread
                     e.printStackTrace();

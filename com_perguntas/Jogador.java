@@ -327,6 +327,14 @@ public class Jogador {
         if (cor1.equals(cor2))
             return;
 
+        try {
+            // Pausa de 250 milissegundos antes de iniciar a verificação
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            // Tratamento de exceção em caso de interrupção da thread
+            e.printStackTrace();
+        }
+
         Platform.runLater(() -> {
             try {
                 // Código que manipula a UI
