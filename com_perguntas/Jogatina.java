@@ -8,7 +8,7 @@ public class Jogatina {
     private int qtd_jogs, indice_atual;
     private String primeira_cor, nomes[];
     private Stage stage;
-    private Peca peca_vencedora, pecas_registradas[] = new Peca[52];
+    private Peca peca, peca2, peca_vencedora, pecas_registradas[] = new Peca[52];
     private TelaPerguntas tela_perguntas;
     private Jogador jog;
     private ArrayList<Jogador> jogs;
@@ -115,6 +115,21 @@ public class Jogatina {
         }
     }
 
+    private void registrarMovimento() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (peca.getTipoAnterior().equals("quad_branco"))
+            pecas_registradas[peca.getPosAnterior()] = null;
+        if (peca_vencedora.getTipoPos().equals("quad_branco"))
+            pecas_registradas[peca_vencedora.getPos()] = peca_vencedora;
+
+        peca.getImagem().setViewOrder(0f);
+    }
+
     public void setPecaVencedora(Peca peca_vencedora) {
         this.peca_vencedora = peca_vencedora;
     }
@@ -132,7 +147,6 @@ public class Jogatina {
         while (true) {
             int i, tempo_pausa;
             boolean jogadas_disponiveis = false;
-            Peca peca = null, peca2;
 
             // Espera até que o botão no tabuleiro seja desativado
             while (tabuleiro.getBotaoAtivado()) {
@@ -206,7 +220,7 @@ public class Jogatina {
                 if (peca.getTipoPos().equals("quad_branco") && peca2 != null)
                     jog.encontrarPecasDiferentes(peca, peca2, this);
 
-                jog.registrarMovimento(peca, peca_vencedora, pecas_registradas);
+                registrarMovimento();
             } else {
                 this.reiniciarPecas();
 

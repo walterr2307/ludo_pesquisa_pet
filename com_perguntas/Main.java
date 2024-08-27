@@ -19,7 +19,7 @@ public class Main extends Application {
 
     // Definindo variáveis para controle de cores, tamanho da janela e quantidade de
     // jogadores
-    private int indice_cor = 0, largura = 960, altura = (int) (largura / 1.5f), qtd_jogs = 4;
+    private int indice_cor = 0, largura = 720, altura = (int) (largura / 1.5f), qtd_jogs = 4;
     private String cor_primeiro_jog, nomes[], temas[], cores[] = { "verde", "amarelo", "vermelho", "azul" };
     private final TextField[] nameFields = new TextField[4];
     private final Label[] warningLabels = new Label[4];
