@@ -494,5 +494,165 @@
         "1": "5",
         "2": "3",
         "3": "10"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual cláusula SQL é usada para agrupar linhas que têm valores em colunas específicas?",
+        "0": "GROUP BY",
+        "1": "ORDER BY",
+        "2": "HAVING",
+        "3": "DISTINCT"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é utilizado para excluir um banco de dados?",
+        "0": "DROP DATABASE",
+        "1": "DELETE DATABASE",
+        "2": "REMOVE DATABASE",
+        "3": "ERASE DATABASE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual operador é utilizado para verificar se um valor está dentro de uma lista de valores?",
+        "0": "IN",
+        "1": "EXISTS",
+        "2": "ANY",
+        "3": "BETWEEN"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual cláusula SQL é usada para combinar registros com base em uma condição comum entre duas tabelas?",
+        "0": "JOIN",
+        "1": "WHERE",
+        "2": "GROUP BY",
+        "3": "MERGE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para alterar a estrutura de uma tabela?",
+        "0": "ALTER TABLE",
+        "1": "MODIFY TABLE",
+        "2": "CHANGE TABLE",
+        "3": "UPDATE TABLE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL pode ser usado para criar um banco de dados?",
+        "0": "CREATE DATABASE",
+        "1": "NEW DATABASE",
+        "2": "BUILD DATABASE",
+        "3": "MAKE DATABASE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual é o tipo de dado utilizado para armazenar grandes textos em SQL?",
+        "0": "TEXT",
+        "1": "VARCHAR",
+        "2": "CHAR",
+        "3": "STRING"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual operador SQL é usado para combinar várias condições em uma consulta?",
+        "0": "AND",
+        "1": "OR",
+        "2": "IN",
+        "3": "NOT"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual tipo de dado é utilizado para armazenar valores de data e hora em SQL?",
+        "0": "DATETIME",
+        "1": "TIME",
+        "2": "DATE",
+        "3": "TIMESTAMP"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual comando SQL é usado para renomear uma tabela existente?",
+        "0": "RENAME TABLE",
+        "1": "ALTER TABLE",
+        "2": "MODIFY TABLE",
+        "3": "UPDATE TABLE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual tipo de dado SQL é usado para armazenar números inteiros?",
+        "0": "INT",
+        "1": "VARCHAR",
+        "2": "FLOAT",
+        "3": "DATE"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual tipo de dado SQL é usado para armazenar valores booleanos?",
+        "0": "BOOLEAN",
+        "1": "CHAR",
+        "2": "BINARY",
+        "3": "FLOAT"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que representa a \"cardinalidade\" em um relacionamento entre tabelas de banco de dados?",
+        "0": "A quantidade de linhas em uma tabela",
+        "1": "O número de relacionamentos entre tabelas",
+        "2": "A quantidade de colunas em uma tabela",
+        "3": "O número de relacionamentos 1 para N entre tabelas"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual dos seguintes é um exemplo de uma entidade em um modelo de dados?",
+        "0": "Pessoa",
+        "1": "Chave primária",
+        "2": "Relacionamento",
+        "3": "Restrição"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que significa \"normalização\" em modelagem de banco de dados?",
+        "0": "Eliminar redundâncias de dados",
+        "1": "Aumentar a complexidade do banco de dados",
+        "2": "Unir tabelas diferentes em uma só",
+        "3": "Criar relacionamentos entre tabelas"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual é o nome da chave que garante a unicidade de registros em uma tabela?",
+        "0": "Chave primária (Primary Key)",
+        "1": "Chave estrangeira (Foreign Key)",
+        "2": "Índice (Index)",
+        "3": "Chave composta"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "O que é um modelo relacional em banco de dados?",
+        "0": "Um modelo baseado em tabelas",
+        "1": "Um modelo baseado em grafos",
+        "2": "Um modelo baseado em documentos",
+        "3": "Um modelo hierárquico"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual tipo de dado SQL é usado para armazenar números com ponto flutuante?",
+        "0": "FLOAT",
+        "1": "INT",
+        "2": "BOOLEAN",
+        "3": "VARCHAR"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Em modelagem de dados, o que é um \"atributo multivalorado\"?",
+        "0": "Um atributo que pode ter múltiplos valores simultaneamente",
+        "1": "Um atributo que sempre tem valor NULL",
+        "2": "Um atributo usado para identificar múltiplos registros",
+        "3": "Um atributo que possui um valor composto por outros atributos"
+    },
+    {
+        "tema": "banco_dados",
+        "pergunta": "Qual é o papel de um \"índice\" (index) em um banco de dados?",
+        "0": "Aumentar a velocidade de consultas",
+        "1": "Eliminar dados duplicados",
+        "2": "Garantir a integridade referencial",
+        "3": "Impedir que valores NULL sejam inseridos"
     }
 ]
