@@ -654,5 +654,166 @@
         "1": "Eliminar dados duplicados",
         "2": "Garantir a integridade referencial",
         "3": "Impedir que valores NULL sejam inseridos"
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual das alternativas abaixo descreve corretamente uma sessão de teste exploratório?",
+        "0": "Uma sessão de teste exploratório tem tempo limite e objetivo definido.",
+        "1": "É realizada sem qualquer limite de tempo.",
+        "2": "O testador segue um roteiro rígido previamente definido, sem desvios.",
+        "3": "É realizada sem objetivo específico."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que é definido em uma Carta de Teste (Charter) durante uma sessão de teste exploratório?",
+        "0": "Apenas o tempo limite da sessão de teste.",
+        "1": "É realizada sem qualquer limite de tempo.",
+        "2": "Uma lista detalhada de todas as ações que o testador deve realizar.",
+        "3": "Somente as funcionalidades que já foram testadas anteriormente."
+
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que a estratégia de Bookmarking permite ao testador em testes exploratórios?",
+        "0": "Registrar pontos específicos do sistema para análise posterior.",
+        "1": "Repetir o mesmo teste várias vezes automaticamente.",
+        "2": "Ignorar pontos específicos do sistema que não sejam relevantes.",
+        "3": "Bloquear o acesso a partes do sistema que apresentem falhas."
+    }, 
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual é o propósito da estratégia de Notetaking em testes exploratórios?",
+        "0": "Documentar atividades e insights para facilitar a análise posterior.",
+        "1": "Automatizar a execução dos testes.",
+        "2": "Registrar apenas os erros críticos encontrados durante o teste.",
+        "3": "Realizar uma avaliação quantitativa dos defeitos encontrados sem registrar."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que caracteriza a técnica de Adivinhação de Erros em testes de software?",
+        "0": "Prever falhas com base em experiências anteriores.",
+        "1": "Executar testes sem considerar a experiência anterior.",
+        "2": "Garantir testes exaustivos de todas as funcionalidades.",
+        "3": "Usar abordagem estatística para prever falhas."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que caracteriza a técnica de Pair Testing (teste em pares) em testes de software?",
+        "0": "Dois testadores trabalham juntos, testando o sistema igualmente.",
+        "1": "Dois testadores trabalham individualmente em diferentes partes do sistema.",
+        "2": "Dois testadores executam o teste ao mesmo tempo, mas em sistemas diferentes.",
+        "3": "Um testador realiza o teste enquanto o outro apenas observa."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que caracteriza a técnica de Tour-based Testing em testes de software?",
+        "0": "Baseia-se em tours focados em diferentes aspectos do sistema.",
+        "1": "O testador explora todo o sistema sem qualquer foco específico.",
+        "2": "Se concentra apenas em verificar a segurança do sistema.",
+        "3": "O testador realiza um único tour em todo o sistema."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual das alternativas a seguir não é um tipo de consistência abordado na Consistência preditiva em testes de software?",
+        "0": "Consistência com a localização geográfica.",
+        "1": "Consistência com a proposta.",
+        "2": "Consistência com o resto da aplicação.",
+        "3": "Consistência histórica."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual a definição de heurísticas e oráculos em testes de software?",
+        "0": "Heurísticas orientam a exploração, e oráculos verificam o comportamento.",
+        "1": "Heurísticas são regras de desenvolvimento, e oráculos são diretrizes criativas.",
+        "2": "Heurísticas validam o software, e oráculos exploram funcionalidades.",
+        "3": "Ambos são métodos de desenvolvimento ágil."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual aspecto é explorado na heurística 'S' do modelo IOSC?",
+        "0": "Armazenamento de dados.",
+        "1": "Entradas de dados.",
+        "2": "Saídas de dados.",
+        "3": "Computação de dados."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que caracteriza a Heurística Goldilocks em testes de software?",
+        "0": "Testa campos com valores mínimos, máximos e corretos",
+        "1": "Foca em testar apenas os casos extremos, ignorando os casos medianos",
+        "2": "Refere-se a testar apenas campos que aceitam valores numéricos.",
+        "3": "Uma abordagem para testar a performance de um sistema sob carga extrema."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual das alternativas descreve corretamente o tipo de oráculo que se baseia na comparação do comportamento do sistema com dados conhecidos e validados?",
+        "0": "Oráculo de Base de Dados",
+        "1": "Oráculo Humano",
+        "2": "Oráculo de Consistência",
+        "3": "Oráculo Histórico"
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual das alternativas descreve corretamente o tipo de oráculo que compara o comportamento do sistema em determinadas condições, verificando a consistência interna do sistema?",
+        "0": "Oráculo de Consistência",
+        "1": "Oráculo Humano",
+        "2": "Oráculo de Base de Dados",
+        "3": "Oráculo Histórico"
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que é o 'Bad Neighborhood Tour' em testes de software?",
+        "0": "Examinar recursos próximos ao local onde um bug foi encontrado.",
+        "1": "Explorar uma nova funcionalidade sem conhecer o sistema.",
+        "2": "Testar funcionalidades de uma área desconhecida do software.",
+        "3": "Investigar áreas do software que já foram testadas e aprovadas."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual é um dos principais desafios em testes de sistemas que utilizam IA?",
+        "0": "A determinação de corretude em sistemas de reconhecimento de fala.",
+        "1": "A baixa capacidade de adaptação dos sistemas baseados em IA.",
+        "2": "A simplicidade e consistência no comportamento das aplicações.",
+        "3": "A escalabilidade garantida de oráculos de resultados precisos."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "O que caracteriza a estratégia 'Tour Bus' em testes de software?",
+        "0": "Fazer um tour pelos recursos principais e voltar à rota após explorar.",
+        "1": "Explorar todos os recursos do sistema sem nenhuma rota definida.",
+        "2": "Ignorar os recursos principais para focar em detalhes menores.",
+        "3": "Realizar testes em ordem aleatória sem um objetivo específico."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual é o objetivo principal da estratégia 'Crime Spree Tour' em testes de software?",
+        "0": "Concentrar-se em quebrar um recurso específico ou área do sistema.",
+        "1": "Explorar toda a interface do sistema sem buscar falhas.",
+        "2": "Realizar testes comuns para garantir que tudo funciona corretamente.",
+        "3": "Testar apenas os fluxos principais do sistema."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Como funciona a estratégia 'Garbage Collectors Tour' em testes de software?",
+        "0": "Foca em um objetivo, testa rapidamente e passa para o próximo.",
+        "1": "Explora o sistema aleatoriamente sem objetivos definidos.",
+        "2": "Realiza testes repetidos em uma única área do sistema.",
+        "3": "Verifica apenas as áreas do sistema que já foram corrigidas."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual é o objetivo da estratégia 'Back Alley Tour' em testes de software?",
+        "0": "Concentrar-se em testar os recursos menos utilizados do sistema.",
+        "1": "Explorar os recursos mais populares e amplamente usados do sistema.",
+        "2": "Repetir testes em funcionalidades já testadas anteriormente.",
+        "3": "Realizar testes rápidos e superficiais em todos os recursos."
+    },
+    {
+        "tema": "testes_exploratorios",
+        "pergunta": "Qual é o foco da estratégia 'User Interface Exploration' em testes de software?",
+        "0": "Explorar a interface do usuário e entendendo as funcionalidades.",
+        "1": "Testar o backend do sistema sem interagir com a interface.",
+        "2": "Repetir testes automáticos sem verificar a interface do usuário.",
+        "3": "Realizar testes de desempenho na interface gráfica."
     }
 ]

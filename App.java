@@ -30,9 +30,12 @@ public class App extends Application {
         CheckBox bdCheckBox = new CheckBox("Banco de Dados");
         CheckBox pooCheckBox = new CheckBox("POO");
         CheckBox progBasicaCheckBox = new CheckBox("Programação Básica");
+        CheckBox testesExploratoriosCheckBox = new CheckBox("Testes Exploratórios"); // Novo CheckBox
 
         // Empacotando os CheckBoxes em uma VBox
-        VBox checkBoxesBox = new VBox(10, bdCheckBox, pooCheckBox, progBasicaCheckBox);
+        VBox checkBoxesBox = new VBox(10, bdCheckBox, pooCheckBox, progBasicaCheckBox, testesExploratoriosCheckBox); // Adicionado
+                                                                                                                     // novo
+                                                                                                                     // CheckBox
         checkBoxesBox.setAlignment(Pos.CENTER_LEFT);
         checkBoxesBox.setPadding(new Insets(0, 0, 0, 20)); // Afastando da borda esquerda
 
@@ -41,7 +44,8 @@ public class App extends Application {
         confirmButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
         confirmButton.setOnAction(e -> {
             // Verifica se pelo menos uma opção foi selecionada
-            if (!bdCheckBox.isSelected() && !pooCheckBox.isSelected() && !progBasicaCheckBox.isSelected()) {
+            if (!bdCheckBox.isSelected() && !pooCheckBox.isSelected() && !progBasicaCheckBox.isSelected()
+                    && !testesExploratoriosCheckBox.isSelected()) {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Atenção");
                 alert.setHeaderText(null);
@@ -56,6 +60,9 @@ public class App extends Application {
                     lista_temas.add("poo");
                 if (progBasicaCheckBox.isSelected())
                     lista_temas.add("programacao_basica");
+                if (testesExploratoriosCheckBox.isSelected()) // Verifica se a opção de Testes Exploratórios foi
+                                                              // selecionada
+                    lista_temas.add("testes_exploratorios");
 
                 temas = new String[lista_temas.size()];
 
