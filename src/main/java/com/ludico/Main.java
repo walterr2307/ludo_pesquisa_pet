@@ -24,6 +24,8 @@ public class Main {
         Scene scene = new Scene(root, largura, altura);
         Stage stage = new Stage();
 
+        Tabuleiro.instanciar();
+
         stage.setTitle("Lúdico");
         stage.setScene(scene);
         stage.setResizable(false);

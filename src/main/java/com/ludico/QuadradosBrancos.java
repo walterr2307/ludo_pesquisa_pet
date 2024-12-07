@@ -6,12 +6,12 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class Quadrados {
+public class QuadradosBrancos {
     private final float[] x_quad_brancos = new float[52], y_quad_brancos = new float[52];
     private final static float largura = Main.getLargura(), altura = Main.getAltura();
     private final static Pane root = Main.getRoot();
 
-    public Quadrados() {
+    public QuadradosBrancos() {
         colocarQuadBrancos();
     }
 
