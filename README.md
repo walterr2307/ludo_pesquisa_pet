@@ -35,27 +35,27 @@ O **Lúdico** foi concebido com o objetivo de democratizar o ensino da computaç
 A seguir, você encontrará uma seleção de imagens e gráficos que enriquecem as informações apresentadas no artigo original, oferecendo uma visão mais detalhada do funcionamento e dos resultados obtidos com o Lúdico:
 
 ### 1. Arquitetura Geral do Lúdico
-![Arquitetura Geral do Lúdico](imagens/figura1-arquitetura.png)  
+![Arquitetura Geral do Lúdico](images/figura1-arquitetura.png)  
 *Figura 1 – Diagrama ilustrando a arquitetura geral do jogo, demonstrando a integração entre os módulos de interface, lógica e manipulação de dados.*
 
 ### 2. Interface do Jogo
-![Interface do Lúdico](imagens/figura2-interface.png)  
+![Interface do Lúdico](images/figura2-interface.png)  
 *Figura 2 – Exemplo da interface gráfica do Lúdico, evidenciando as peças e o tabuleiro interativo.*
 
 ### 3. Mecânica de Perguntas para Movimentação
-![Mecânica de Perguntas](imagens/figura3-mecanica.png)  
+![Mecânica de Perguntas](images/figura3.png)  
 *Figura 3 – Fluxograma que detalha a mecânica de perguntas, onde a resposta correta permite a movimentação das peças e a captura de adversários.*
 
 ### 4. Estrutura do JSON de Perguntas
-![Estrutura do JSON](imagens/figura4-json.png)  
+![Estrutura do JSON](images/figura4-json.png)  
 *Figura 4 – Exemplo da organização do arquivo JSON que armazena as perguntas e respostas do jogo.*
 
 ### 5. Feedback e Avaliação dos Usuários – Disciplina de Banco de Dados
-![Feedback dos Participantes](imagens/figura5-feedback-bd.png)  
+![Feedback dos Participantes](images/fig5.png)  
 *Figura 5 – Gráficos que demonstram a percepção dos alunos quanto à didática, dificuldade e engajamento durante as partidas do Lúdico na disciplina de Banco de Dados.*
 
 ### 6. Feedback e Avaliação dos Usuários – Semana Universitária
-![Feedback Semana Universitária](imagens/figura6-feedback-su.png)  
+![Feedback Semana Universitária](images/figura6.png)  
 *Figura 6 – Resultados da oficina “Testes Exploratórios na Prática” na Semana Universitária, evidenciando a receptividade e as sugestões dos participantes.*
 
 > **Nota:** Essas imagens complementam o artigo "Lúdico: O Jogo que ensina sobre T.I", ampliando a visão sobre o desenvolvimento, aplicação e os resultados obtidos com o jogo.
