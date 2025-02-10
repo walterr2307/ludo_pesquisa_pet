@@ -51,7 +51,7 @@ A seguir, você encontrará uma seleção de imagens e gráficos que enriquecem 
 *Figura 4 – Exemplo da organização do arquivo JSON que armazena as perguntas e respostas do jogo.*
 
 ### 5. Feedback e Avaliação dos Usuários – Disciplina de Banco de Dados
-![Feedback dos Participantes](images/fig5.png)  
+![Feedback dos Participantes](images/fig5.pdf)  
 *Figura 5 – Gráficos que demonstram a percepção dos alunos quanto à didática, dificuldade e engajamento durante as partidas do Lúdico na disciplina de Banco de Dados.*
 
 ### 6. Feedback e Avaliação dos Usuários – Semana Universitária
