@@ -4,6 +4,8 @@ Bem-vindo ao repositório do **Lúdico**, um jogo inovador desenvolvido para ens
 
 Este repositório reúne não apenas o código-fonte do jogo, mas também uma série de gráficos e imagens complementares que não puderam ser incluídos no artigo publicado sobre o Lúdico.
 
+![LOGO](https://github.com/user-attachments/assets/be6b4218-13b6-4009-a802-b4ee92a9ddfd)
+
 ---
 
 ## Sobre o Projeto
